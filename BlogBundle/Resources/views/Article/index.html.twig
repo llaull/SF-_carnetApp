@@ -1,0 +1,55 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}les carnets de voyages{% endblock title %}
+{% block h1_header %}Les carnet de voyages{% endblock h1_header %}
+{% block h1_header_s %}-{% endblock h1_header_s %}
+
+{% block dynamic_body %}
+
+    <div class="col-md-12 bootstrap-grid">
+
+        <div class="powerwidget" id="datatable-basic-init" data-widget-editbutton="false">
+            <header>
+                {#<h2>tableaux</h2>#}
+                {#<h2>plup#}
+                {#<small>-</small>#}
+                {#</h2>#}
+            </header>
+            <div class="inner-spacer">
+
+                <ul class="btn-group">
+                    <a class="btn btn-success btn-sm" role="button" href="{{ path('admin_carnet_blog_article_new') }}">New</a>
+                </ul>
+
+                <table class="table table-striped table-hover" id="table-1">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Actived</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td class="col-md-5">{{ entity.title }}</td>
+                            <td class="col-md-5">{{ entity.actived }}</td>
+                            <td class="col-md-2">
+                                <div class="btn-group">
+                                    <a class="btn btn-default btn-sm" role="button"
+                                       href="{{ path('admin_carnet_blog_article_show', { 'slug': entity.slug }) }}">view</a>
+                                    <a class="btn btn-warning btn-sm" role="button"
+                                       href="{{ path('admin_carnet_blog_article_edit', { 'id': entity.id }) }}">edit</a>
+                                    <a class="btn btn-danger btn-sm modal-delete" role="button"
+                                       data-href="{{ path('admin_carnet_blog_article_delete', { 'id': entity.id }) }}"
+                                       href="{{ path('admin_carnet_blog_article_delete', { 'id': entity.id }) }}">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock dynamic_body %}

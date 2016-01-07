@@ -1,0 +1,20 @@
+carnet_app_blog_admin_carnet_blog_comment:
+    resource: "@CarnetAppBlogBundle/Resources/config/routing/comment.yml"
+    prefix:   /admin/carnet/blog/comment
+
+carnet_app_blog_admin_carnet_blog_category:
+    resource: "@CarnetAppBlogBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/carnet/blog/category
+
+carnet_app_blog_admin_carnet_blog_article:
+    resource: "@CarnetAppBlogBundle/Resources/config/routing/article.yml"
+    prefix:   /admin/carnet/blog/article
+
+
+carnets_de_voy_blog:
+    path:     /carnet/le-lounge/
+    defaults: { _controller: CarnetAppBlogBundle:Default:indexBlog }
+
+carnets_de_voy_blog_article:
+    path:     /carnet/le-lounge/{slug}
+    defaults: { _controller: CarnetAppBlogBundle:Article:show }

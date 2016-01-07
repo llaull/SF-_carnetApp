@@ -1,0 +1,30 @@
+admin_carnet_blog_category:
+    path:     /
+    defaults: { _controller: "CarnetAppBlogBundle:Category:index" }
+
+admin_carnet_blog_category_show:
+    path:     /{id}/show
+    defaults: { _controller: "CarnetAppBlogBundle:Category:show" }
+
+admin_carnet_blog_category_new:
+    path:     /new
+    defaults: { _controller: "CarnetAppBlogBundle:Category:new" }
+
+admin_carnet_blog_category_create:
+    path:     /create
+    defaults: { _controller: "CarnetAppBlogBundle:Category:create" }
+    methods:  POST
+
+admin_carnet_blog_category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CarnetAppBlogBundle:Category:edit" }
+
+admin_carnet_blog_category_update:
+    path:     /{id}/update
+    defaults: { _controller: "CarnetAppBlogBundle:Category:update" }
+    methods:  [POST, PUT]
+
+admin_carnet_blog_category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CarnetAppBlogBundle:Category:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,30 @@
+admin_carnet_blog_comment:
+    path:     /
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:index" }
+
+admin_carnet_blog_comment_show:
+    path:     /{id}/show
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:show" }
+
+admin_carnet_blog_comment_new:
+    path:     /new
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:new" }
+
+admin_carnet_blog_comment_create:
+    path:     /create
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:create" }
+    methods:  POST
+
+admin_carnet_blog_comment_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:edit" }
+
+admin_carnet_blog_comment_update:
+    path:     /{id}/update
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:update" }
+    methods:  [POST, PUT]
+
+admin_carnet_blog_comment_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CarnetAppBlogBundle:Comment:delete" }
+    methods:  [POST, DELETE]
