@@ -6,8 +6,6 @@ use Doctrine\ORM\EntityRepository;
 
 class CarnetRepository extends EntityRepository
 {
-
-
     /**
      * affiche les carnets dans l'accueil coté client
      * @return array

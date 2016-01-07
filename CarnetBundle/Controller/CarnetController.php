@@ -16,6 +16,28 @@ class CarnetController extends Controller
 {
 
     /**
+     * dessine le chemin du voyage
+     *
+     */
+    public function pathAction($slug)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')
+            ->findOneBy(array('slug' => $slug));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Carnet entity.');
+        }
+
+        $entities = $this->getDoctrine()->getRepository('CarnetAppCarnetBundle:Carnet');
+        $entities = $entities->findPath($em,$entity->getId());
+
+        return new JsonResponse(array('path' => $entities));
+    }
+
+    /**
      * Lists all Carnet entities.
      *
      */
@@ -44,7 +66,7 @@ class CarnetController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_carnet_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_carnet'));
         }
 
         return $this->render('CarnetAppCarnetBundle:Carnet:new.html.twig', array(
@@ -101,11 +123,13 @@ class CarnetController extends Controller
             throw $this->createNotFoundException('Unable to find Carnet entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $lieux = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findBy(
+            array('carnet' => $entity->getId(), 'useInPath' => "1"),
+            array('ordre' => 'ASC'));
 
         return $this->render('CarnetAppCarnetBundle:Carnet:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'lieux' => $lieux
         ));
     }
 
@@ -119,6 +143,14 @@ class CarnetController extends Controller
 
         $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')->find($id);
 
+        $entitiesL = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findBy(
+            array('carnet' => $entity),
+            array('ordre' => 'ASC'));
+
+        $entitiesP = $em->getRepository('CarnetAppCarnetBundle:Page')->findBy(
+            array('lieu' => $entitiesL),
+            array('ordre' => 'ASC'));
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Carnet entity.');
         }
@@ -128,6 +160,8 @@ class CarnetController extends Controller
 
         return $this->render('CarnetAppCarnetBundle:Carnet:edit.html.twig', array(
             'entity'      => $entity,
+            'lieux' => $entitiesL,
+            'pages' => $entitiesP,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -187,20 +221,16 @@ class CarnetController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')->find($id);
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Carnet entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Carnet entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_carnet'));
     }
