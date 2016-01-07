@@ -1,0 +1,60 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}les pages{% endblock title %}
+{% block h1_header %}Pages{% endblock h1_header %}
+{% block h1_header_s %}des villes{% endblock h1_header_s %}
+
+{% block dynamic_body %}
+
+    <div class="col-md-12 bootstrap-grid">
+
+        <div class="powerwidget" id="datatable-basic-init" data-widget-editbutton="false">
+            <header>
+                {#<h2>plup#}
+                    {#<small>Basic Init {{ pagination.totalCount }}</small>#}
+                {#</h2>#}
+            </header>
+            <div class="inner-spacer">
+
+                <ul>
+                    <li>
+                        <a class="btn btn-success btn-sm" role="button" href="{{ path('admin_page_new') }}">New</a>
+                    </li>
+                </ul>
+
+                <table class="table table-striped table-hover" id="table-1">
+                    <thead>
+                    <tr>
+                        <th>Carnet</th>
+                        <th>Ville</th>
+                        <th>Titre</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in pagination %}
+                        <tr {% if loop.index is odd %}class="info"{% endif %}>
+                            <td class="col-md-4">{{ entity.title }}</td>
+                            <td class="col-md-3">{{ entity.ville }}</td>
+                            <td class="col-md-3">{{ entity.titre }}</td>
+                            <td class="col-md-2">
+                                <div class="btn-group">
+                                    <a class="btn btn-default btn-sm" role="button"
+                                       href="{{ path('carnets_de_voy_page',
+                                       { 'carnet': entity.Cslug,'ville': entity.Lslug,'page': entity.slug }) }}">view</a>
+                                    <a class="btn btn-warning btn-sm" role="button"
+                                       href="{{ path('admin_page_edit', { 'id': entity.id }) }}">edit</a>
+                                    <a class="btn btn-danger btn-sm modal-delete" role="button"
+                                       data-href="{{ path('admin_page_delete', { 'id': entity.id }) }}"
+                                       href="{{ path('admin_page_delete', { 'id': entity.id }) }}">Delete</a>
+                                </div>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock dynamic_body %}

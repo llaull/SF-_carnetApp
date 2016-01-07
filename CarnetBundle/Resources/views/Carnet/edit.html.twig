@@ -1,0 +1,135 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}les carnets de voyages{% endblock title %}
+{% block h1_header %}Les carnet de voyages{% endblock h1_header %}
+{% block h1_header_s %}-{% endblock h1_header_s %}
+{% block controlerLink %}{{ path('admin_carnet') }}{% endblock controlerLink %}
+{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% trans_default_domain "app" %}
+{% block dynamic_body %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <div class="col-md-12 bootstrap-grid">
+        <!-- New widget -->
+        <div class="powerwidget cold-grey" id="power-forms-grid" data-widget-editbutton="false"
+             data-widget-deletebutton="false">
+            <header>
+                <h2>Information
+                    <small> sur le carnet</small>
+                </h2>
+            </header>
+            <div class="inner-spacer">
+                {{ form(edit_form) }}
+            </div>
+        </div>
+        <!-- End .powerwidget -->
+    </div>
+
+    <div class="col-md-12 bootstrap-grid">
+        <div class="powerwidget" id="widget-update-header" data-widget-editbutton="false"
+             data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+            <header>
+                <h2>header</h2>
+                <small> du carnet</small>
+            </header>
+            <div class="container" style="text-align: center">
+                <img src="{{ entity.imageHeader }}" alt="header carnet de voyage"/>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- New widget -->
+    <div class="row col-md-12">
+        <div class="col-md-6 bootstrap-grid" id="powerwidgets">
+            <div class="powerwidget green" id="most-form-elements" data-widget-editbutton="false"
+                 data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+                <header>
+                    <h2>Ordonner
+                        <small> le menu</small>
+                    </h2>
+                </header>
+                <div class="inner-spacer">
+                    <div class="dd" id="nestable">
+                        <ul class="dd-list" id="nestableLieu">
+                            {% for l in lieux %}
+                            <li class="dd-item" id="{{ l.id }}" title="lieu">
+                                <div class="dd-handle">{{ l.ville }}</div>
+
+                                {% for p in pages %}
+                                    {% if p.lieu.id==l.id %}
+                                        <ul class="dd-list" id="nestablePage" title="page">
+                                            <li class="dd-item" id="{{ p.id }}">
+                                                <div class="dd-handle">{{ p.titre }}</div>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% endfor %}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block dynamic_js %}
+
+    {% javascripts
+    '@CommunUserBundle/Resources/public/js/nestable-lists/jquery.nestable.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            var updateOutput = function () {
+                var i = 0;
+                var array = jQuery('#nestable li').map(function () {
+                    return '{"id":"' + this.id + '", "type":"' + this.title + '","order":"' + ++i + '"}';
+                }).get();
+                var order = '[' + array.join(',') + ']';
+//                console.log(order);
+
+                $.ajax({
+                    data: 'data=' + order,
+                    cache: false,
+                    type: 'POST',
+                    url: "{{ path ('admin_page_order')}}",
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+
+            };
+
+            if ($('#nestable').length) {
+                $('#nestable').nestable({
+                    group: 1,
+                    maxDepth: 2
+
+                }).on('change', updateOutput);
+            }
+
+            if ($('#nestable-menu').length) {
+                $('#nestable-menu').on('click', function (e) {
+                    var target = $(e.target),
+                            action = target.data('action');
+                    if (action === 'expand-all') {
+                        $('.dd').nestable('expandAll');
+                    }
+                    if (action === 'collapse-all') {
+                        $('.dd').nestable('collapseAll');
+                    }
+                });
+            }
+
+
+        });
+    </script>
+{% endblock dynamic_js %}

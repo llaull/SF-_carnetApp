@@ -1,0 +1,65 @@
+{% extends 'CarnetsBundle:Default:index.html.twig' %}
+{% block body %}
+    big acceuil
+
+    {% image '@CarnetsBundle/Resources/public/images/marker_2.png'
+    output='/images/marker_2.png' %}
+    <img src="{{ asset_url }}"/>
+    {% endimage %}
+
+    <div class="top-baner header2-baner">
+        <div id="map-canvas" class="style-1" data-lat="39.3968485" data-lng="3.4163545" data-zoom="2"
+             data-style="2"></div>
+        {% if lieux is defined %}
+            {% for l in lieux %}
+                <div class="addresses-block">
+                    <a data-lat="{{ l.lat }}" data-lng="{{ l.lng }}" data-string="{{ l.ville }}"></a>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+    <div class="main-wraper hotel-items">
+        <div class="container">
+            {% if carnets is defined %}
+                {% for row in carnets|batch(3) %}
+                    <div clas="row">
+                        {% for carnet in row %}
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="hotel-item style-6">
+                                    <div class="radius-top">
+                                        <img src="{{ carnet.imageAccueil }}" alt="">
+                                    </div>
+                                    <div class="title">
+                                        <h5><strong class="color-red-3">{{ carnet.title }}</strong></h5>
+                                        <h4>{{ carnet.destination }}</h4>
+
+                                        <p>{{ carnet.description }}</p>
+
+                                        <div class="clearfix">
+                                            <a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}"
+                                               class="c-button b-40 color-grey-3 hv-o fr">{% image '@CarnetsBundle/Resources/public/images/flag_icon_grey.png'
+                                                output='/images/flag_icon_grey.png' %}
+                                                <img src="{{ asset_url }}"/>
+                                                {% endimage %}
+                                                découvrir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
+    {% block javascripts %}
+        {% javascripts
+        '@CarnetsBundle/Resources/public/js/map.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}

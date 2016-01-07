@@ -1,0 +1,52 @@
+<header class="color-1 hovered menu-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nav">
+                    <a href="{{ path('carnets_de_voy_homepage') }}" class="logo">
+
+                        {% image '@CarnetsBundle/Resources/public/images/Logo_cdv.png'
+                        output='/images/logo.png' %}
+                        <img src="{{ asset_url }}"/>
+                        {% endimage %}
+
+                    </a>
+
+                    <div class="nav-menu-icon">
+                        <a href="#"><i></i></a>
+                    </div>
+
+                    <nav class="menu">
+                        <ul>
+                            <li class="type-1 active">
+                                <a href="{{ path('carnets_de_voy_destination',{'slug':carnet.slug}) }}">X</a>
+                            </li>
+                            {% for l in lieu %}
+                                {% set ville = l.ville|split(',') %}
+                                <li class="type-1 active">
+                                    <a href="{{ path('carnets_de_voy_ville',{'carnet':l.carnet.slug,'ville': l.slug }) }}">{{ ville[0] }}
+                                        <span class="fa fa-angle-down"></span></a>
+                                    <ul class="dropmenu">
+                                        {#<li>#}
+                                        {#<a href="{{ path('carnets_de_voy_ville',{'carnet':l.carnet.slug,'ville': l.slug }) }}">#}
+                                        {#Découvrir</a>#}
+                                        {#</li>#}
+                                        {% for p in page %}
+
+                                            {% if p.lieu.ville==l.ville %}
+                                                <li>
+                                                    <a href="{{ path('carnets_de_voy_page',{'carnet':l.carnet.slug,'ville': l.slug, 'page': p.slug }) }}"> {{ p.titre }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

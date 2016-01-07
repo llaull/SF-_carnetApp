@@ -1,1 +1,61 @@
-Hello {{ name }}!
+{% if entity is defined %}
+    {% set carnetActuel = entity.slug %}
+    {% set metaTitle = entity.title %}
+    {% set metaDescription = entity.title %}
+
+    {% if entity.pinterestLink is defined %}
+        {% set pinterest_board = entity.pinterestLink %}
+    {% endif %}
+
+{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if entity is defined %}{{ metaTitle }}{% else %}Accueil{% endif %} - carnet de voyage</title>
+    <link rel="stylesheet" href="{{ asset('css/entypo.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+    {% stylesheets
+    '@CarnetsBundle/Resources/public/css/bootstrap.min.css'
+    '@CarnetsBundle/Resources/public/css/jquery-ui.structure.min.css'
+    '@CarnetsBundle/Resources/public/css/jquery-ui.min.css'
+    '@CarnetsBundle/Resources/public/css/style.css'
+    output='css/compiled/carnet.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
+    {% endstylesheets %}
+
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/carnet/images/favicon.ico') }}" />
+</head>
+<body data-color="theme-7">
+
+<div>
+
+    {% block nav %}
+        {% if entity is defined %}
+            {% if entity.slug is defined %}
+                {{ render(controller('CarnetsBundle:Menu:carnetMenu', {'carnet':entity.slug})) }}
+            {% endif %}
+        {% else %}
+            {{ render(controller('CarnetsBundle:Menu:menu')) }}
+        {% endif %}
+    {% endblock %}
+
+    {% block body %}{% endblock %}
+
+
+    {% block footer %}{{ render(controller('CarnetsBundle:Menu:footer')) }}{% endblock %}
+
+
+</div>
+
+{% javascripts '@CommunUserBundle/Resources/public/js/jquery/jquery.min.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<script src="{{ asset('assets/bootstrap/bootstrap.min.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,30 @@
+admin_carnet_lieu:
+    path:     /
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:index" }
+
+admin_carnet_lieu_show:
+    path:     /{id}/show
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:show" }
+
+admin_carnet_lieu_new:
+    path:     /new
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:new" }
+
+admin_carnet_lieu_create:
+    path:     /create
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:create" }
+    methods:  POST
+
+admin_carnet_lieu_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:edit" }
+
+admin_carnet_lieu_update:
+    path:     /{id}/update
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:update" }
+    methods:  [POST, PUT]
+
+admin_carnet_lieu_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,63 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}les carnets de voyages{% endblock title %}
+{% block h1_header %}Pages{% endblock h1_header %}
+{% block h1_header_s %}creation{% endblock h1_header_s %}
+{% block controlerLink %}{{ path('admin_page') }}{% endblock controlerLink %}
+{#{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}#}
+{% trans_default_domain "app" %}
+{% block dynamic_body %}
+
+    <div class="col-md-12 bootstrap-grid">
+
+        <div class="powerwidget" id="datatable-basic-init" data-widget-editbutton="false">
+            <header>
+                <h2>Nouveelle
+                    <small>page du carnet</small>
+                </h2>
+            </header>
+            <div class="inner-spacer">
+                <div class="inner-spacer">
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block dynamic_js %}
+    <script>
+        (function ($) {
+            $('select[id$=carnetsbundle_page_carnet]').change(function () {
+
+                //a chaque changement on vide le select
+                $('#carnetsbundle_page_lieu').empty();
+
+                $.ajax({
+                    type: "POST",
+                    data: "data=" + $(this).val(),
+                    url: "{{ path('jquery_carnet_by_lieu') }}",
+                    always: function(){
+                        console.log("a");
+                        $('#carnetsbundle_page_lieu').append($('<option>').text("WAIT").attr('value', null));
+                        console.log("a");
+                    },
+                    fail: function(){
+                        console.log("a");
+                        $('#carnetsbundle_page_lieu').append($('<option>').text("selectionne").attr('value', null));
+                    },
+                    success: function (json) {
+                        if (json != '') {
+                            $.each(json.lieu, function (i, value) {
+                                console.log(value);
+                                $('#carnetsbundle_page_lieu').append($('<option>').text(value.ville).attr('value', value.id));
+                            });
+                        }
+                        else {
+                            $('#carnetsbundle_page_lieu').append($('<option>').text("selectionne un carnet").attr('value', null));
+                        }
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
+{% endblock dynamic_js %}

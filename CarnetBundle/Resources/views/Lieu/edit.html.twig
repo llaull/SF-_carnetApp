@@ -1,0 +1,60 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}les carnets de voyages{% endblock title %}
+{% block h1_header %}les pages{% endblock h1_header %}
+{% block h1_header_s %}edition{% endblock h1_header_s %}
+{% block controlerLink %}{{ path('admin_carnet') }}{% endblock controlerLink %}
+{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% trans_default_domain "app" %}
+{% block dynamic_body %}
+    <script>
+        function initMap() {
+
+
+            var input = document.getElementById('carnetsbundle_lieu_ville');
+            new google.maps.places.SearchBox(input);
+
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('carnetsbundle_lieu_useInPath').addEventListener('click', function() {
+                geocodeAddress(geocoder);
+            });
+
+        }
+
+        function geocodeAddress(geocoder) {
+            var address = document.getElementById('carnetsbundle_lieu_ville').value;
+
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    $("#carnetsbundle_lieu_lat").val((results[0].geometry.location.lat()));
+                    $("#carnetsbundle_lieu_lng").val((results[0].geometry.location.lng()));
+
+                } else {
+                    console.log('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_ZQKuddf-gIFkFOPFLeBO9oycJH25jmY&libraries=places&signed_in=true&callback=initMap"
+            async defer></script>
+    <div class="col-md-12 bootstrap-grid">
+
+        <div class="powerwidget" id="datatable-basic-init" data-widget-editbutton="false">
+            <header>
+                <h2>Lieu
+                    <small>edit</small>
+                </h2>
+            </header>
+            <div class="inner-spacer">
+                <div class="inner-spacer">
+
+                    {{ form(edit_form) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
