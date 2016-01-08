@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
     {% stylesheets
-    '@CarnetsBundle/Resources/public/css/bootstrap.min.css'
-    '@CarnetsBundle/Resources/public/css/jquery-ui.structure.min.css'
-    '@CarnetsBundle/Resources/public/css/jquery-ui.min.css'
-    '@CarnetsBundle/Resources/public/css/style.css'
+    '@CarnetAppStaticPageBundle/Resources/public/css/bootstrap.min.css'
+    '@CarnetAppStaticPageBundle/Resources/public/css/jquery-ui.structure.min.css'
+    '@CarnetAppStaticPageBundle/Resources/public/css/jquery-ui.min.css'
+    '@CarnetAppStaticPageBundle/Resources/public/css/style.css'
     output='css/compiled/carnet.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
     {% endstylesheets %}
@@ -37,17 +37,17 @@
     {% block nav %}
         {% if entity is defined %}
             {% if entity.slug is defined %}
-                {{ render(controller('CarnetsBundle:Menu:carnetMenu', {'carnet':entity.slug})) }}
+                {{ render(controller('CarnetAppStaticPageBundle:Menu:carnetMenu', {'carnet':entity.slug})) }}
             {% endif %}
         {% else %}
-            {{ render(controller('CarnetsBundle:Menu:menu')) }}
+            {{ render(controller('CarnetAppStaticPageBundle:Menu:menu')) }}
         {% endif %}
     {% endblock %}
 
     {% block body %}{% endblock %}
 
 
-    {% block footer %}{{ render(controller('CarnetsBundle:Menu:footer')) }}{% endblock %}
+    {#{% block footer %}{{ render(controller('CarnetAppStaticPageBundle:Menu:footer')) }}{% endblock %}#}
 
 
 </div>

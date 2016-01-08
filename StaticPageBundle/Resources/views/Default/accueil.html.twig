@@ -1,8 +1,8 @@
-{% extends 'CarnetsBundle:Default:index.html.twig' %}
+{% extends 'CarnetAppStaticPageBundle:Default:index.html.twig' %}
 {% block body %}
     big acceuil
 
-    {% image '@CarnetsBundle/Resources/public/images/marker_2.png'
+    {% image '@CarnetAppStaticPageBundle/Resources/public/images/marker_2.png'
     output='/images/marker_2.png' %}
     <img src="{{ asset_url }}"/>
     {% endimage %}
@@ -39,7 +39,7 @@
 
                                         <div class="clearfix">
                                             <a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}"
-                                               class="c-button b-40 color-grey-3 hv-o fr">{% image '@CarnetsBundle/Resources/public/images/flag_icon_grey.png'
+                                               class="c-button b-40 color-grey-3 hv-o fr">{% image '@CarnetAppStaticPageBundle/Resources/public/images/flag_icon_grey.png'
                                                 output='/images/flag_icon_grey.png' %}
                                                 <img src="{{ asset_url }}"/>
                                                 {% endimage %}
@@ -59,7 +59,7 @@
 {% endblock %}
     {% block javascripts %}
         {% javascripts
-        '@CarnetsBundle/Resources/public/js/map.js' %}
+        '@CarnetAppStaticPageBundle/Resources/public/js/map.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}

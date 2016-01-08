@@ -25,9 +25,9 @@ class PageController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //met tout a null
-        $q = $em->createQuery('update CarnetsBundle:Lieu c set c.ordre = 1');
+        $q = $em->createQuery('update CarnetAppCarnetBundle:Lieu c set c.ordre = 1');
         $q->execute();
-        $q = $em->createQuery('update CarnetsBundle:Page c set c.ordre = 1');
+        $q = $em->createQuery('update CarnetAppCarnetBundle:Page c set c.ordre = 1');
         $q->execute();
 
 

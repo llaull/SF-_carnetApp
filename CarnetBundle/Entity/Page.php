@@ -193,7 +193,7 @@ class Page
     /**
      * Get lieu
      *
-     * @return \CarnetsBundle\Entity\Lieu
+     * @return \CarnetApp\CarnetBundle\Entity\Lieu
      */
     public function getLieu()
     {
@@ -203,11 +203,11 @@ class Page
     /**
      * Set lieu
      *
-     * @param \CarnetsBundle\Entity\Lieu $lieu
+     * @param \CarnetApp\CarnetBundle\Entity\Lieu $lieu
      *
      * @return Page
      */
-    public function setLieu(\CarnetsBundle\Entity\Lieu $lieu = null)
+    public function setLieu(\CarnetApp\CarnetBundle\Entity\Lieu $lieu = null)
     {
         $this->lieu = $lieu;
 

@@ -22,7 +22,7 @@ class PageType extends AbstractType
         $builder->add('carnet', 'entity', array(
             'label' => 'carnet',
             'attr' => array('class' => 'input-block-level'),
-            'class' => 'CarnetsBundle:Carnet',
+            'class' => 'CarnetAppCarnetBundle:Carnet',
             'property' => 'title',
             'empty_value' => 'All',
             'required' => true,
@@ -30,7 +30,7 @@ class PageType extends AbstractType
         $builder->add('lieu', 'entity', array(
             'label' => 'lieu',
             'attr' => array('class' => 'input-block-level'),
-            'class' => 'CarnetsBundle:Lieu',
+            'class' => 'CarnetAppCarnetBundle:Lieu',
             'property' => 'ville',
             'empty_value' => 'All',
             'required' => true,

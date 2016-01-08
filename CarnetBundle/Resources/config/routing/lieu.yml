@@ -31,5 +31,5 @@ admin_carnet_lieu_delete:
 
 jquery_carnet_by_lieu:
     path:     /byCarnet
-    defaults: { _controller: "CarnetsBundle:Lieu:getCarnet" }
+    defaults: { _controller: "CarnetAppCarnetBundle:Lieu:getCarnet" }
     methods:  [POST, DELETE, GET]
