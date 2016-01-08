@@ -4,6 +4,7 @@ namespace CarnetApp\CarnetBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use CarnetApp\CarnetBundle\Entity\Carnet;
 use CarnetApp\CarnetBundle\Form\Type\CarnetType;
@@ -113,11 +114,12 @@ class CarnetController extends Controller
      * Finds and displays a Carnet entity.
      *
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')->find($id);
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')
+            ->findOneBy(array('slug' => $slug));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Carnet entity.');

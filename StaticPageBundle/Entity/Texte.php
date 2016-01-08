@@ -1,22 +1,21 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: moi
- * Date: 03/01/2016
- * Time: 19:39
+ * User: laurent
+ * Date: 20/12/2015
+ * Time: 21:31
  */
-namespace CarnetApp\BlogBundle\Entity;
+
+namespace CarnetApp\StaticPageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="carnet2voyage__blogArticle")
- * @ORM\Entity(repositoryClass="CarnetApp\BlogBundle\Repository\BlogRepository")
+ * @ORM\Table(name="carnet2voyage__generalTexte")
  */
-class Article
+class Texte
 {
     /**
      * @ORM\Id
@@ -37,12 +36,6 @@ class Article
      */
     protected $modified;
     /**
-     * @var datetime $publied
-     *
-     * @ORM\Column(type="datetime")
-     */
-    protected $publied;
-    /**
      * @ORM\Column(type="string", length=90)
      */
     protected $title;
@@ -60,88 +53,48 @@ class Article
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    protected $actived;
+    protected $useInMenu;
     /**
-     * @var category
-     *
-     * @ORM\ManyToOne(targetEntity="Category")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    protected $category;
-
-    /**
-     * @var \Commun\UserBundle\Entity\user
-     *
-     * @ORM\ManyToOne(targetEntity="Commun\UserBundle\Entity\user")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="autor_id", referencedColumnName="id")
-     * })
-     */
-    protected $autor;
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true, options={"default":"http://placehold.it/600x600"}))
-     *
-     */
-    protected $image;
+    protected $ordre;
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
         $this->created = new \DateTime();
         $this->modified = new \DateTime();
-        $this->publied = new \DateTime();
     }
 
     /**
      * @return mixed
      */
-    public function getImage()
+    public function getOrdre()
     {
-        return $this->image;
+        return $this->ordre;
     }
 
     /**
-     * @param mixed $image
+     * @param mixed $ordre
      */
-    public function setImage($image)
+    public function setOrdre($ordre)
     {
-        $this->image = $image;
+        $this->ordre = $ordre;
     }
 
     /**
-     * @return \Commun\UserBundle\Entity\user
+     * @return mixed
      */
-    public function getAutor()
+    public function getUseInMenu()
     {
-        return $this->autor;
+        return $this->useInMenu;
     }
 
     /**
-     * @param \Commun\UserBundle\Entity\user $autor
+     * @param mixed $useInMenu
      */
-    public function setAutor($autor)
+    public function setUseInMenu($useInMenu)
     {
-        $this->autor = $autor;
-    }
-
-    public function __toString()
-    {
-        return $this->title;
-    }
-    /**
-     * @return category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param category $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
+        $this->useInMenu = $useInMenu;
     }
 
     /**
@@ -161,7 +114,7 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return datetime
      */
     public function getCreated()
     {
@@ -169,7 +122,7 @@ class Article
     }
 
     /**
-     * @param mixed $created
+     * @param datetime $created
      */
     public function setCreated($created)
     {
@@ -190,22 +143,6 @@ class Article
     public function setModified($modified)
     {
         $this->modified = $modified;
-    }
-
-    /**
-     * @return datetime
-     */
-    public function getPublied()
-    {
-        return $this->publied;
-    }
-
-    /**
-     * @param datetime $publied
-     */
-    public function setPublied($publied)
-    {
-        $this->publied = $publied;
     }
 
     /**
@@ -256,20 +193,5 @@ class Article
         $this->contenu = $contenu;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getActived()
-    {
-        return $this->actived;
-    }
-
-    /**
-     * @param mixed $actived
-     */
-    public function setActived($actived)
-    {
-        $this->actived = $actived;
-    }
 
 }

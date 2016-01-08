@@ -1,0 +1,35 @@
+admin_carnet_staticPage_texte:
+    path:     /
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:index" }
+
+admin_carnet_staticPage_texte_show:
+    path:     /{id}/show
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:show" }
+
+admin_carnet_staticPage_texte_new:
+    path:     /new
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:new" }
+
+admin_carnet_staticPage_texte_create:
+    path:     /create
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:create" }
+    methods:  POST
+
+admin_carnet_staticPage_texte_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:edit" }
+
+admin_carnet_staticPage_texte_update:
+    path:     /{id}/update
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:update" }
+    methods:  [POST, PUT]
+
+admin_carnet_staticPage_texte_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:delete" }
+    methods:  [POST, DELETE]
+
+admin_carnet_staticPage_order:
+    path:     /order/edit/
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:order" }
+    methods:  [POST, PUT]

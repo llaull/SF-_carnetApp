@@ -15,20 +15,28 @@ carnet_app_carnet_admin_carnet:
 #
 general_texte_show:
     path:     /{slug}.html
-    defaults: { _controller: "CarnetsBundle:GeneralTexte:show" }
+    defaults: { _controller: "CarnetAppCarnetBundle:Texte:show" }
 
 carnets_de_voy_homepage:
     path:     /nos-voyages
-    defaults: { _controller: CarnetsBundle:Default:index }
+    defaults: { _controller: CarnetAppCarnetBundle:Default:index }
 
 carnets_de_voy_destination:
     path:     /carnet/{slug}
-    defaults: { _controller: CarnetsBundle:Carnet:show }
+    defaults: { _controller: CarnetAppCarnetBundle:Carnet:show }
 
 carnets_de_voy_ville:
     path:     /carnet/{carnet}/{ville}.html
-    defaults: { _controller: CarnetsBundle:Lieu:show }
+    defaults: { _controller: CarnetAppCarnetBundle:Lieu:show }
 
 carnets_de_voy_page:
     path:     /carnet/{carnet}/{ville}/{page}.html
-    defaults: { _controller: CarnetsBundle:Page:show }
+    defaults: { _controller: CarnetAppCarnetBundle:Page:show }
+
+
+#
+#     AJAX
+#
+carnets_de_voy_carte_path:
+    path:     /carnet/path/{slug}
+    defaults: { _controller: CarnetAppCarnetBundle:Carnet:path }

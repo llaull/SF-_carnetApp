@@ -16,6 +16,20 @@ class LieuController extends Controller
 {
 
     /**
+     * Lists all lieu by carnet id
+     *
+     */
+    public function getCarnetAction(Request $request)
+    {
+        $data = $request->request->get('data');
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findByCarnet($data);
+
+        return new JsonResponse(array('lieu' => $entities));
+    }
+
+    /**
      * Lists all Lieu entities.
      *
      */
@@ -29,6 +43,7 @@ class LieuController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Lieu entity.
      *
@@ -44,12 +59,12 @@ class LieuController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_carnet_lieu_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_carnet_lieu'));
         }
 
         return $this->render('CarnetAppCarnetBundle:Lieu:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -79,11 +94,11 @@ class LieuController extends Controller
     public function newAction()
     {
         $entity = new Lieu();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('CarnetAppCarnetBundle:Lieu:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -91,21 +106,21 @@ class LieuController extends Controller
      * Finds and displays a Lieu entity.
      *
      */
-    public function showAction($id)
+    public function showAction($carnet, $ville)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->find($id);
+        $carnetInfos = $em->getRepository('CarnetAppCarnetBundle:Carnet')->findOneBySlug($carnet);
+
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findOneBySlug($ville);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Lieu entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('CarnetAppCarnetBundle:Lieu:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+        return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
+            'entity' => $carnetInfos,
+            'page' => $entity,
         ));
     }
 
@@ -127,19 +142,19 @@ class LieuController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppCarnetBundle:Lieu:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Lieu entity.
-    *
-    * @param Lieu $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Lieu entity.
+     *
+     * @param Lieu $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Lieu $entity)
     {
         $form = $this->createForm(new LieuType(), $entity, array(
@@ -151,6 +166,7 @@ class LieuController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Lieu entity.
      *
@@ -176,31 +192,28 @@ class LieuController extends Controller
         }
 
         return $this->render('CarnetAppCarnetBundle:Lieu:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Lieu entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->find($id);
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Lieu entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Lieu entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_carnet_lieu'));
     }
@@ -218,7 +231,6 @@ class LieuController extends Controller
             ->setAction($this->generateUrl('admin_carnet_lieu_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

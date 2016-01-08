@@ -1,0 +1,139 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}Les menu{% endblock title %}
+{% block h1_header %}les pages{% endblock h1_header %}
+{% block h1_header_s %}generals du site{% endblock h1_header_s %}
+
+{% block dynamic_body %}
+
+    <div class="col-md-12 bootstrap-grid">
+
+        <div class="powerwidget" id="datatable-basic-init" data-widget-editbutton="false">
+            <header>
+                {#<h2>plup#}
+                {#<small>Basic Init {{ pagination.totalCount }}</small>#}
+                {#</h2>#}
+            </header>
+            <div class="inner-spacer">
+
+                <ul>
+                    <li>
+                        <a class="btn btn-success btn-sm" role="button"
+                           href="{{ path('admin_general_texte_new') }}">New</a>
+                    </li>
+                </ul>
+
+                <table class="table table-striped table-hover" id="table-1">
+                    <thead>
+                    <tr>
+                        <th>Modified</th>
+                        <th>Title</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{% if entity.modified %}{{ entity.modified|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{{ entity.title }}</td>
+                            <td class="col-md-2">
+                                <div class="btn-group">
+                                    <a class="btn btn-default btn-sm" role="button"
+                                       href="{{ path('general_texte_show', { 'slug': entity.slug}) }}">view</a>
+                                    <a class="btn btn-warning btn-sm" role="button"
+                                       href="{{ path('admin_general_texte_edit', { 'id': entity.id }) }}">edit</a>
+                                    <a class="btn btn-danger btn-sm modal-delete" role="button"
+                                       data-href="{{ path('admin_general_texte_delete', { 'id': entity.id }) }}"
+                                       href="{{ path('admin_general_texte_delete', { 'id': entity.id }) }}">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- New widget -->
+    <div class="row col-md-12">
+        <div class="col-md-6 bootstrap-grid" id="powerwidgets">
+            <div class="powerwidget green" id="most-form-elements" data-widget-editbutton="false"
+                 data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+                <header>
+                    <h2>Ordonner
+                        <small> le menu</small>
+                    </h2>
+                </header>
+                <div class="inner-spacer">
+                    <div class="dd" id="nestable">
+                        <ul class="dd-list" id="nestableLieu">
+                            {% for entity in entities %}
+                                {% if entity.useInMenu==1 %}
+                                    <li class="dd-item" id="{{ entity.id }}" title="lieu">
+                                        <div class="dd-handle">{{ entity.title }}</div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock dynamic_body %}
+{% block dynamic_js %}
+
+    {% javascripts
+    '@CommunUserBundle/Resources/public/js/nestable-lists/jquery.nestable.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            var updateOutput = function () {
+                var i = 0;
+                var array = jQuery('#nestable li').map(function () {
+                    return '{"id":"' + this.id + '", "type":"' + this.title + '","order":"' + ++i + '"}';
+                }).get();
+                var order = '[' + array.join(',') + ']';
+
+                $.ajax({
+                    data: 'data=' + order,
+                    cache: false,
+                    type: 'POST',
+                    url: "{{ path ('admin_general_texte_order')}}",
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+
+            };
+
+            if ($('#nestable').length) {
+                $('#nestable').nestable({
+                    group: 1,
+                    maxDepth: 2
+
+                }).on('change', updateOutput);
+            }
+
+            if ($('#nestable-menu').length) {
+                $('#nestable-menu').on('click', function (e) {
+                    var target = $(e.target),
+                            action = target.data('action');
+                    if (action === 'expand-all') {
+                        $('.dd').nestable('expandAll');
+                    }
+                    if (action === 'collapse-all') {
+                        $('.dd').nestable('collapseAll');
+                    }
+                });
+            }
+
+
+        });
+    </script>
+{% endblock dynamic_js %}

@@ -3,7 +3,7 @@ admin_carnet:
     defaults: { _controller: "CarnetAppCarnetBundle:Carnet:index" }
 
 admin_carnet_show:
-    path:     /{id}/show
+    path:     /{slug}/show
     defaults: { _controller: "CarnetAppCarnetBundle:Carnet:show" }
 
 admin_carnet_new:

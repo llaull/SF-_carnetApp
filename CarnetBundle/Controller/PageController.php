@@ -4,6 +4,7 @@ namespace CarnetApp\CarnetBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use CarnetApp\CarnetBundle\Entity\Page;
 use CarnetApp\CarnetBundle\Form\Type\PageType;
@@ -14,6 +15,50 @@ use CarnetApp\CarnetBundle\Form\Type\PageType;
  */
 class PageController extends Controller
 {
+
+
+    public function orderAction(Request $request)
+    {
+
+        $data = $request->request->get('data');
+        $params = json_decode($data);
+        $em = $this->getDoctrine()->getManager();
+
+        //met tout a null
+        $q = $em->createQuery('update CarnetsBundle:Lieu c set c.ordre = 1');
+        $q->execute();
+        $q = $em->createQuery('update CarnetsBundle:Page c set c.ordre = 1');
+        $q->execute();
+
+
+        $em = $this->getDoctrine()->getManager();
+        foreach ($params as $v) {
+            if ($v->type != "lieu") {
+
+                $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->find($v->id);
+
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find Page entity.');
+                }
+
+                $entity->setOrdre($v->order);
+
+            } else {
+
+                $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->find($v->id);
+
+                if (!$entity) {
+                    throw $this->createNotFoundException('Unable to find Lieu entity.');
+                }
+
+                $entity->setOrdre($v->order);
+            }
+
+        }
+        $em->flush();
+        return new JsonResponse(array('result' => "ok"));
+
+    }
 
     /**
      * Lists all Page entities.
@@ -91,21 +136,21 @@ class PageController extends Controller
      * Finds and displays a Page entity.
      *
      */
-    public function showAction($id)
+    public function showAction($carnet, $page)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->find($id);
+        $carnetInfos = $em->getRepository('CarnetAppCarnetBundle:Carnet')->findOneBySlug($carnet);
+
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->findOneBySlug($page);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'entity' => $carnetInfos,
+            'page' => $entity,
         ));
     }
 
@@ -187,22 +232,18 @@ class PageController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->find($id);
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Page entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        return $this->redirect($this->generateUrl('admin_carnet_page_page'));
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_carnet_page'));
     }
 
     /**

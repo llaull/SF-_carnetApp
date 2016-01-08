@@ -44,7 +44,7 @@ class CommentController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_carnet_blog_comment_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('carnets_de_voy_blog_article', array('slug' => $entity->getArcticle()->getSlug())));
         }
 
         return $this->render('CarnetAppBlogBundle:Comment:new.html.twig', array(

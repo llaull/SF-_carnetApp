@@ -189,14 +189,14 @@ X
                 });
             }
 
-            if ($('#carnetsbundle_blogcomment_arcticle').length) {
+            if ($('#carnetapp_blogbundle_comment_arcticle').length) {
 
                 /**
                  *
                  */
                 $("a.comment-reply").click(function () {
                     var replyAt = $(this).attr("data-commentId");
-                    $('#carnetsbundle_blogcomment_reply').val(replyAt);
+                    $('#carnetapp_blogbundle_comment_reply').val(replyAt);
 
                     return false
                 });
@@ -205,7 +205,7 @@ X
                  permet de charger l'article dans le select du commentaire
                  */
                 var text1 = '{{ article.title }}';
-                $("#carnetsbundle_blogcomment_arcticle option").filter(function () {
+                $("#carnetapp_blogbundle_comment_arcticle option").filter(function () {
                     //may want to use $.trim in here
                     return $(this).text() == text1;
                 }).attr('selected', true);
