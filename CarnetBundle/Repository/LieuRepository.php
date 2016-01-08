@@ -4,8 +4,6 @@ namespace CarnetApp\CarnetBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-use CarnetApp\CarnetBundle\Entity\Lieu;
-
 class LieuRepository extends EntityRepository
 {
 

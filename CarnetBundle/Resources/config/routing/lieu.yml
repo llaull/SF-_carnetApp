@@ -28,3 +28,8 @@ admin_carnet_lieu_delete:
     path:     /{id}/delete
     defaults: { _controller: "CarnetAppCarnetBundle:Lieu:delete" }
     methods:  [POST, DELETE]
+
+jquery_carnet_by_lieu:
+    path:     /byCarnet
+    defaults: { _controller: "CarnetsBundle:Lieu:getCarnet" }
+    methods:  [POST, DELETE, GET]

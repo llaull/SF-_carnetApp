@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
 * @ORM\Entity
 * @ORM\Table(name="carnet2voyage__page")
-* @ORM\Entity(repositoryClass="CarnetAppCarnetBundle\Repository\PageRepository")
+* @ORM\Entity(repositoryClass="CarnetApp\CarnetBundle\Repository\PageRepository")
 */
 class Page
 {

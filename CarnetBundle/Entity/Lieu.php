@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity
  * @ORM\Table(name="carnet2voyage__lieux")
- * @ORM\Entity(repositoryClass="CarnetAppCarnetBundle\Repository\LieuRepository")
+ * @ORM\Entity(repositoryClass="CarnetApp\CarnetBundle\Repository\LieuRepository")
  */
 class Lieu
 {

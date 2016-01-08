@@ -17,7 +17,7 @@
 
                 <ul>
                     <li>
-                        <a class="btn btn-success btn-sm" role="button" href="{{ path('admin_page_new') }}">New</a>
+                        <a class="btn btn-success btn-sm" role="button" href="{{ path('admin_carnet_page_new') }}">New</a>
                     </li>
                 </ul>
 
@@ -31,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for entity in pagination %}
+                    {% for entity in entities %}
                         <tr {% if loop.index is odd %}class="info"{% endif %}>
                             <td class="col-md-4">{{ entity.title }}</td>
                             <td class="col-md-3">{{ entity.ville }}</td>

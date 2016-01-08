@@ -8,9 +8,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity
  * @ORM\Table(name="carnet2voyage__carnets")
+ * @ORM\Entity(repositoryClass="CarnetApp\CarnetBundle\Repository\CarnetRepository")
  */
 
-// * @ORM\Entity(repositoryClass="CarnetAppCarnetBundle\Repository\CarnetRepository")
 class Carnet
 {
 

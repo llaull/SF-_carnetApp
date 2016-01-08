@@ -44,7 +44,7 @@ class LieuController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('carnet_lieu_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_carnet_lieu_show', array('id' => $entity->getId())));
         }
 
         return $this->render('CarnetAppCarnetBundle:Lieu:new.html.twig', array(
@@ -63,7 +63,7 @@ class LieuController extends Controller
     private function createCreateForm(Lieu $entity)
     {
         $form = $this->createForm(new LieuType(), $entity, array(
-            'action' => $this->generateUrl('carnet_lieu_create'),
+            'action' => $this->generateUrl('admin_carnet_lieu_create'),
             'method' => 'POST',
         ));
 
@@ -143,7 +143,7 @@ class LieuController extends Controller
     private function createEditForm(Lieu $entity)
     {
         $form = $this->createForm(new LieuType(), $entity, array(
-            'action' => $this->generateUrl('carnet_lieu_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('admin_carnet_lieu_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class LieuController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('carnet_lieu_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_carnet_lieu_edit', array('id' => $id)));
         }
 
         return $this->render('CarnetAppCarnetBundle:Lieu:edit.html.twig', array(
@@ -202,7 +202,7 @@ class LieuController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('carnet_lieu'));
+        return $this->redirect($this->generateUrl('admin_carnet_lieu'));
     }
 
     /**
@@ -215,7 +215,7 @@ class LieuController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('carnet_lieu_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_carnet_lieu_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -36,13 +36,13 @@ class CarnetType extends AbstractType
         $builder->add('imageAccueil', 'elfinder', array(
             'instance' => 'form',
             'label' => 'image de l\'accueil',
-            'required' => true,
+            'required' => false,
             'attr' => array('class' => 'form-control')
         ))
             ->add('imageHeader', 'elfinder', array(
                 'instance' => 'form',
                 'label' => 'header du carnet',
-                'required' => true,
+                'required' => false,
                 'attr' => array('class' => 'form-control')
             ));
 
