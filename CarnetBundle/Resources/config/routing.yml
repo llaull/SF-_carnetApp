@@ -33,7 +33,6 @@ carnets_de_voy_page:
     path:     /carnet/{carnet}/{ville}/{page}.html
     defaults: { _controller: CarnetAppCarnetBundle:Page:show }
 
-
 #
 #     AJAX
 #

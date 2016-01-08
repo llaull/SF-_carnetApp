@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use CarnetApp\StaticPageBundle\Entity\Texte;
-use CarnetApp\StaticPageBundle\Form\TexteType;
+use CarnetApp\StaticPageBundle\Form\Type\TexteType;
 
 /**
  * Texte controller.
