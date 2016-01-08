@@ -4,6 +4,7 @@ namespace CarnetApp\StaticPageBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use CarnetApp\StaticPageBundle\Entity\Texte;
 use CarnetApp\StaticPageBundle\Form\Type\TexteType;
@@ -119,21 +120,18 @@ class TexteController extends Controller
      * Finds and displays a Texte entity.
      *
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CarnetAppStaticPageBundle:Texte')->find($id);
+        $entity = $em->getRepository('CarnetAppStaticPageBundle:Texte')->findOneBySlug($slug);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Texte entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return $this->render('CarnetAppStaticPageBundle:Texte:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'GeneralTexte' => $entity
         ));
     }
 

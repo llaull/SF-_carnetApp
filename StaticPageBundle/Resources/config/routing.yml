@@ -1,3 +1,10 @@
 admin_carnet_staticPage_texte:
     resource: "@CarnetAppStaticPageBundle/Resources/config/routing/texte.yml"
     prefix:   /admin/carnet/staticPage/texte
+
+#
+#     cote front office
+#
+general_texte_show:
+    path:     /{slug}.html
+    defaults: { _controller: "CarnetAppStaticPageBundle:Texte:show" }

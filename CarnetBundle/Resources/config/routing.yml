@@ -13,10 +13,6 @@ carnet_app_carnet_admin_carnet:
 #
 #     cote front office
 #
-general_texte_show:
-    path:     /{slug}.html
-    defaults: { _controller: "CarnetAppCarnetBundle:Texte:show" }
-
 carnets_de_voy_homepage:
     path:     /nos-voyages
     defaults: { _controller: CarnetAppCarnetBundle:Default:index }
