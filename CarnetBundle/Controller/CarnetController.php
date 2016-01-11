@@ -16,6 +16,37 @@ use CarnetApp\CarnetBundle\Form\Type\CarnetType;
 class CarnetController extends Controller
 {
 
+
+    /**
+     * @param null $carnet
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    function carnetMenuAction($carnet = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')
+            ->findOneBy(array('slug' => $carnet));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Carnet entity.');
+        }
+
+        $lieux = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findBy(
+            array('carnet' => $entity, 'useInMenu' => "1"),
+            array('ordre' => 'ASC'));
+
+        $pages = $em->getRepository('CarnetAppCarnetBundle:Page')->findBy(
+            array('lieu' => $lieux),
+            array('ordre' => 'ASC'));
+
+        return $this->container->get('templating')->renderResponse('CarnetAppCarnetBundle:Carnet:menu.html.twig', array(
+            'carnet' => $entity,
+            'lieu' => $lieux,
+            'page' => $pages,
+        ));
+    }
+
     /**
      * dessine le chemin du voyage
      *

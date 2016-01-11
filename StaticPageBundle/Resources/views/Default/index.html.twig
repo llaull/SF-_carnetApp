@@ -37,7 +37,7 @@
     {% block nav %}
         {% if entity is defined %}
             {% if entity.slug is defined %}
-                {{ render(controller('CarnetAppStaticPageBundle:Menu:carnetMenu', {'carnet':entity.slug})) }}
+                {{ render(controller('CarnetAppCarnetBundle:Carnet:carnetMenu', {'carnet':entity.slug})) }}
             {% endif %}
         {% else %}
             {{ render(controller('CarnetAppStaticPageBundle:Menu:menu')) }}
@@ -47,11 +47,10 @@
     {% block body %}{% endblock %}
 
 
-    {#{% block footer %}{{ render(controller('CarnetAppStaticPageBundle:Menu:footer')) }}{% endblock %}#}
+    {% block footer %}{{ render(controller('CarnetAppStaticPageBundle:Menu:footer')) }}{% endblock %}
 
 
 </div>
-
 {% javascripts '@CommunUserBundle/Resources/public/js/jquery/jquery.min.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}

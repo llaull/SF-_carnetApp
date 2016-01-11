@@ -62,7 +62,7 @@
                                     {#<p class="f-14">&nbsp;{{ l.contenu|slice(0, 120)|raw }}</p>#}
                                     <a href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': l.slug }) }}"
                                        class="c-button transparent color-grey-3 hv-o">
-                                        {% image '@CarnetAppCarnetBundle/Resources/public/images/flag_icon_grey.png'
+                                        {% image '@CarnetAppStaticPageBundle/Resources/public/images/flag_icon_grey.png'
                                         output='/images/flag_icon_grey.png' %}
                                         <img src="{{ asset_url }}"/>
                                         {% endimage %}
@@ -80,9 +80,9 @@
 {% endblock %}
 {% block javascripts %}
     {% javascripts
-    '@CarnetAppCarnetBundle/Resources/public/js/idangerous.swiper.min.js'
-    '@CarnetAppCarnetBundle/Resources/public/js/landing.js'
-    '@CarnetAppCarnetBundle/Resources/public/js/all.js' %}
+    '@CarnetAppStaticPageBundle/Resources/public/js/idangerous.swiper.min.js'
+    '@CarnetAppStaticPageBundle/Resources/public/js/landing.js'
+    '@CarnetAppStaticPageBundle/Resources/public/js/all.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 

@@ -28,35 +28,7 @@ class MenuController extends Controller
         ));
     }
 
-    /**
-     * @param null $carnet
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    function carnetMenuAction($carnet = null)
-    {
-        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CarnetAppBlogBundle:Carnet')
-            ->findOneBy(array('slug' => $carnet));
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Carnet entity.');
-        }
-
-        $lieux = $em->getRepository('CarnetAppBlogBundle:Lieu')->findBy(
-            array('carnet' => $entity, 'useInMenu' => "1"),
-            array('ordre' => 'ASC'));
-
-        $pages = $em->getRepository('CarnetAppBlogBundlev:Page')->findBy(
-            array('lieu' => $lieux),
-            array('ordre' => 'ASC'));
-
-        return $this->container->get('templating')->renderResponse('CarnetAppStaticPageBundle:Carnet:menu.html.twig', array(
-            'carnet' => $entity,
-            'lieu' => $lieux,
-            'page' => $pages,
-        ));
-    }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
@@ -71,7 +43,7 @@ class MenuController extends Controller
 
         $footerTexte = $em->getRepository('CarnetAppStaticPageBundle:Texte')->findByTitle("footer");
 
-        $tagLieu = $em->getRepository('CarnetAppBlogBundle:Lieu')->tagAll();
+        $tagLieu = $em->getRepository('CarnetAppCarnetBundle:Lieu')->tagAll();
 
         if (!$links) {
             throw $this->createNotFoundException('Unable to find Texte entity.');
