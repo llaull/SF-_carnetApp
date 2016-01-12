@@ -33,7 +33,7 @@
 <body data-color="theme-7">
 
 <div>
-
+    {{ render(controller('CarnetAppToolBundle:Option:index')) }}
     {% block nav %}
         {% if entity is defined %}
             {% if entity.slug is defined %}

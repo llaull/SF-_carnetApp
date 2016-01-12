@@ -16,6 +16,19 @@ class OptionController extends Controller
 {
 
     /**
+     * Lists all Option entities.
+     *
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('CarnetAppToolBundle:Option')->findById(1);
+        return $this->render('CarnetAppToolBundle:Option:index.html.twig', array(
+            'toolOption' => current($entities),
+        ));
+    }
+    /**
      * Displays a form to edit an existing Option entity.
      *
      */

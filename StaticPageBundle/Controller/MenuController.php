@@ -23,8 +23,11 @@ class MenuController extends Controller
             throw $this->createNotFoundException('Unable to find Texte entity.');
         }
 
+        $tool = $em->getRepository('CarnetAppToolBundle:Option')->findById(1);
+
         return $this->container->get('templating')->renderResponse('CarnetAppStaticPageBundle:Default:menu.html.twig', array(
-            'links' => $links
+            'links' => $links,
+            'toolOption' => current($tool)
         ));
     }
 
