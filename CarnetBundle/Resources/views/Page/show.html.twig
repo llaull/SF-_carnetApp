@@ -70,11 +70,11 @@
                         <div class="right-sidebar">
                             <div class="detail-block bg-dr-blue">
                                 <div class="details-desc">
-                                    {% if pinterest_board is not null %}
+                                    {% if page.pinterestLink is not null %}
                                         <a data-pin-do="embedBoard" data-pin-lang="fr" data-pin-board-width="230"
                                            data-pin-scale-height="300"
                                            data-pin-scale-width="60"
-                                           href="https://www.pinterest.com/{{ pinterest_account }}/{{ pinterest_board }}/"></a>
+                                           href="https://www.pinterest.com/{{ pinterest_account }}/{{ page.pinterestLink }}/"></a>
                                         <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
                                     {% endif %}
                                 </div>
