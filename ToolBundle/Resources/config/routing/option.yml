@@ -1,0 +1,8 @@
+admin_carnet_tool_option_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CarnetAppToolBundle:Option:edit" }
+
+admin_carnet_tool_option_update:
+    path:     /{id}/update
+    defaults: { _controller: "CarnetAppToolBundle:Option:update" }
+    methods:  [POST, PUT]

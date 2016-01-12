@@ -1,0 +1,28 @@
+{% extends "CommunUserBundle:Admin:MainWrapper.html.twig" %}
+{% block title %}les carnets de voyages{% endblock title %}
+{% block h1_header %}les options{% endblock h1_header %}
+{% block h1_header_s %}de l'app{% endblock h1_header_s %}
+{% block controlerLink %}{{ path('admin_carnet_tool_option_edit', {'id':1}) }}{% endblock controlerLink %}
+{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% trans_default_domain "app" %}
+{% block dynamic_body %}
+
+    <div class="col-md-12 bootstrap-grid">
+
+        <div class="powerwidget" id="datatable-basic-init" data-widget-editbutton="false">
+            <header>
+                <h2>Option de l'application
+                    <small>carnet de voyage</small>
+                </h2>
+            </header>
+            <div class="inner-spacer">
+                <div class="inner-spacer">
+
+                    {{ form(edit_form) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
