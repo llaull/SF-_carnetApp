@@ -16,8 +16,6 @@
       {lang: 'fr'}
     </script>
 
-
-X
         <!-- INNER-BANNER -->
         <div class="inner-banner style-6">
             <div class="inner-banner style-6 background-block" style="background-color: #5f5f5f">
@@ -149,16 +147,16 @@ X
                                 <ul class="sidebar-category color-5">
                                 {% set articleNb = 0 %}
                                     {% for c in category %}
-                                        {% set articleNb = c.articleNb + articleNb %}
-                                    {% endfor %}
+        {% set articleNb = c.articleNb + articleNb %}
+    {% endfor %}
                                     <li>
                                         <a href="#">all <span class="fr">({{ articleNb }})</span></a>
                                     </li>
                                     {% for categories in category %}
-                                    <li>
-                                        <a href="#">{{ categories.title }} <span class="fr">({{ categories.articleNb }})</span></a>
-                                    </li>
-                                {% endfor %}
+        <li>
+            <a href="#">{{ categories.title }} <span class="fr">({{ categories.articleNb }})</span></a>
+        </li>
+    {% endfor %}
                                 </ul>
                             </div>
 
@@ -175,14 +173,24 @@ X
     {% endblock %}
 {% block javascripts %}
 
-
     <script type="text/javascript">
 
         $(document).ready(function () {
 
+
+            /*
+             accordion dans les articles du blog
+             */
+            if ($('div#accordion').length) {
+                $('#accordion').accordion({
+                    active: false,
+                    collapsible: true
+                });
+            }
+
             /*
              désactive le retour des liens
-            */
+             */
             if ($('div.share').length) {
                 $("div.share a").click(function () {
                     return false

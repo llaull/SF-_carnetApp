@@ -16,9 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if entity is defined %}{{ metaTitle }}{% else %}Accueil{% endif %} - carnet de voyage</title>
 
-    <meta property="og:url"           content="{{ app.request.uri }}" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="{% if entity is defined %}{{ metaTitle }}{% else %}Accueil{% endif %} - carnet de voyage" />
+    {#facebook meta#}
+    <meta property="og:url" content="{{ app.request.uri }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title"
+          content="{% if entity is defined %}{{ metaTitle }}{% else %}Accueil{% endif %} - carnet de voyage"/>
     {#<meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />#}
 
     {% stylesheets
@@ -32,12 +34,12 @@
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
     {% endstylesheets %}
 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
     {% stylesheets
     '@CarnetAppStaticPageBundle/Resources/public/css/bootstrap.min.css'
     '@CarnetAppStaticPageBundle/Resources/public/css/jquery-ui.structure.min.css'
     '@CarnetAppStaticPageBundle/Resources/public/css/jquery-ui.min.css'
     '@CarnetAppStaticPageBundle/Resources/public/css/style.css'
+    '@CarnetAppStaticPageBundle/Resources/public/css/custom.css'
     output='css/compiled/carnet.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
     {% endstylesheets %}
@@ -49,6 +51,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset_url }}"/>
     {% endimage %}
 
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
 
 </head>
 <body data-color="theme-7">
@@ -73,6 +76,12 @@
 {% javascripts '@CommunUserBundle/Resources/public/js/jquery/jquery.min.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
+
+{% javascripts '@CarnetAppStaticPageBundle/Resources/public/js/jquery-ui/jquery-ui.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+
 <script src="{{ asset('bundles/carnetappstaticpage/js/bootstrap/bootstrap.min.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>

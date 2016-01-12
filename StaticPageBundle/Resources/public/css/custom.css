@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/*STYLE.CSS*/
+
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/* 01 - google map contener */
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+#map_canvas {
+    /*width: 1024px;*/
+    /*height: 100%;*/
+    min-height: 500px;
+    /*margin-bottom: 10px;*/
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+/* 02 - accordéon css
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+
+/*div.detail-content-block > div.accordeon {*/
+    /*border: 1px solid red;*/
+/*}*/
+
+/*div.accordeon ol, div.accordeon li  {*/
+    /*list-style: none;*/
+/*}*/
+
+/*div.detail-content-block > div.accordeon  > ol > li > p {*/
+    /*background-color: green;*/
+/*}*/
+
+
+/*div.detail-content-block > div.accordeon  > ol > li > ol > li {*/
+    /*background-color: black;*/
+    /*color: white;*/
+    /*display: none;*/
+
+/*}*/
+/*body > div:nth-child(1) > div.detail-wrapper > div > div > div.col-xs-12.col-md-8 > div.detail-content > div > div.accordeon > ol > li:nth-child(1) > p*/
+/*body > div:nth-child(1) > div.detail-wrapper > div > div > div.col-xs-12.col-md-8 > div.detail-content > div > div.accordeon > ol > li:nth-child(1) > ol > li > p:nth-child(1)*/
+
+
+div.detail-content-block .ui-accordion-header{
+    position: relative;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 14px 45px 14px 70px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #2d3e50;
+    color: #fff;
+}
