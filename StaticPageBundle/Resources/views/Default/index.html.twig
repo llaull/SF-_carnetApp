@@ -77,12 +77,14 @@
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 
-{% javascripts '@CarnetAppStaticPageBundle/Resources/public/js/jquery-ui/jquery-ui.js' %}
+{% javascripts '@CarnetAppStaticPageBundle/Resources/public/js/jquery-ui/jquery-ui.min.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 
+{% javascripts '@CarnetAppStaticPageBundle/Resources/public/js/bootstrap/bootstrap.min.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
-<script src="{{ asset('bundles/carnetappstaticpage/js/bootstrap/bootstrap.min.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
