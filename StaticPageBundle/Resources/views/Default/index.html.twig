@@ -15,8 +15,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if entity is defined %}{{ metaTitle }}{% else %}Accueil{% endif %} - carnet de voyage</title>
-    <link rel="stylesheet" href="{{ asset('css/entypo.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
+
+    <meta property="og:url"           content="{{ app.request.uri }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{% if entity is defined %}{{ metaTitle }}{% else %}Accueil{% endif %} - carnet de voyage" />
+    {#<meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />#}
+
+    {% stylesheets
+    '@CarnetAppStaticPageBundle/Resources/public/css/entypo.css'
+    output='css/compiled/entypo.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
+    {% endstylesheets %}
+    {% stylesheets
+    '@CarnetAppStaticPageBundle/Resources/public/css/font-awesome.css'
+    output='css/compiled/font-awesome.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen"/>
+    {% endstylesheets %}
+
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
     {% stylesheets
     '@CarnetAppStaticPageBundle/Resources/public/css/bootstrap.min.css'
@@ -28,7 +43,13 @@
     {% endstylesheets %}
 
     {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/carnet/images/favicon.ico') }}" />
+
+    {% image '@CarnetAppStaticPageBundle/Resources/public/images/favicon.ico'
+    output='favicon.png' %}
+    <link rel="icon" type="image/x-icon" href="{{ asset_url }}"/>
+    {% endimage %}
+
+
 </head>
 <body data-color="theme-7">
 
@@ -46,15 +67,13 @@
 
     {% block body %}{% endblock %}
 
-
     {% block footer %}{{ render(controller('CarnetAppStaticPageBundle:Menu:footer')) }}{% endblock %}
-
 
 </div>
 {% javascripts '@CommunUserBundle/Resources/public/js/jquery/jquery.min.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
-<script src="{{ asset('assets/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bundles/carnetappstaticpage/js/bootstrap/bootstrap.min.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
