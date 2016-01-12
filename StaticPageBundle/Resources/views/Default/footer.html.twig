@@ -1,28 +1,20 @@
-
 {% block footer %}
-
-    {#{{ dump() }}#}
     <!-- FOOTER -->
     <footer class="bg-dark type-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-block">
-
                         {% image '@CarnetAppStaticPageBundle/Resources/public/images/Logo_cdv.png'
                         output='/images/carnet-de-voyage.png' %}
                         <img src="{{ asset_url }}"/>
                         {% endimage %}
-
-
                         <div class="f_text color-grey-7">
                             {{ footerTexte.contenu | raw }}
                         </div>
                         <div class="footer-share">
-                            <a href="#"><span class="fa fa-facebook"></span></a>
-                            <a href="#"><span class="fa fa-twitter"></span></a>
-                            <a href="#"><span class="fa fa-google-plus"></span></a>
-                            <a href="#"><span class="fa fa-pinterest"></span></a>
+                            <a href="https://twitter.com/llovem33" target="_blank"><span class="fa fa-twitter"></span></a>
+                            <a href="https://fr.pinterest.com/{{ pinterest_account }}/" target="_blank"><span class="fa fa-pinterest"></span></a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +93,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="copyright">
-                            <span>&copy; 2015 All rights reserved. LET'STRAVEL</span>
+                            <span>&copy; 2015 All rights reserved. llovem.eu</span>
                         </div>
                         <ul>
                             {% for l in links %}
