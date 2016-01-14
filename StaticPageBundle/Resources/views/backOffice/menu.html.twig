@@ -1,0 +1,38 @@
+<li><a class="{{ "CarnetApp"|menuActive(app.request.attributes.get('_controller')) }} submenu" href="#"
+       title="Carnet de voyages" data-id="carnets-sub"><i
+                class="entypo-address"></i><span> carnet de voyages</span></a>
+    <ul id="carnets-sub" class="accordion">
+        <li><a href="{{ path('admin_carnet_staticPage_texte') }}" title="Les textes generaux"><i
+                        class="entypo-doc-text"></i><span> les pages static</span></a>
+        </li>
+        <li><a href="{{ path('admin_carnet_tool_option_edit', {'id':1}) }}" title="Les options"><i
+                        class="entypo-tools"></i><span> les options</span></a>
+        </li>
+        <li><a href="{{ path('admin_carnet') }}" title="Les carnets"><i
+                        class="entypo-map"></i><span> les carnets</span></a>
+        </li>
+        <li><a href="{{ path('admin_carnet_lieu') }}" title="Les lieux"><i
+                        class="entypo-address"></i><span> les lieux</span></a>
+        </li>
+        <li><a href="{{ path('admin_carnet_page') }}" title="Les pages"><i
+                        class="entypo-book-open"></i><span> les pages</span></a>
+        </li>
+        <li><a href="#" title="Le blog"
+               class="{{ "CarnetApp"|menuActive(app.request.attributes.get('_controller')) }} submenu accordion"
+               data-id="blog-sub"><i
+                        class="entypo-compass"></i><span> le blog</span></a>
+            <ul id="blog-sub">
+                <li><a href="{{ path('admin_carnet_blog_article') }}" title="les articles"><i
+                                class="entypo-newspaper"></i><span> les articles</span></a>
+                </li>
+                <li><a href="{{ path('admin_carnet_blog_category') }}" title="les categories"><i
+                                class="entypo-archive"></i><span> les categories</span></a>
+                </li>
+                <li><a href="{{ path('admin_carnet_blog_comment') }}" title="les commentaires"><i
+                                class="glyphicon glyphicon-comment"></i><span> les commentaires</span></a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</li>

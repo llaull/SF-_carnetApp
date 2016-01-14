@@ -56,11 +56,13 @@ class MenuController extends Controller
             $footerTexte = array(array("contenu" => "footer à remplir"));
         }
 
+        $tool = $em->getRepository('CarnetAppToolBundle:Option')->findById(1);
+
         return $this->container->get('templating')->renderResponse('CarnetAppStaticPageBundle:Default:footer.html.twig', array(
             'links' => $links,
             'footerTexte' => current($footerTexte),
             'tag' => $tagLieu,
-
+            'toolOption' => current($tool)
         ));
     }
 }

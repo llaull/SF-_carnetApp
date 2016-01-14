@@ -9,7 +9,7 @@
             {% elseif page.imageHeader %}
                 {% set image = page.imageHeader %}
             {% endif %}
-          {#   <img class="center-image" src="{{ image }}"/>#}
+            {#   <img class="center-image" src="{{ image }}"/>#}
 
             <div class="vertical-align">
                 <div class="container">
@@ -26,9 +26,9 @@
                                 {% elseif page.titre %}
                                     <li><a class="link-blue-2"
                                            href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': page.lieu.slug }) }}"> {{ page.lieu.ville }}</a>
-                                /
-                                </li>
-                                <li><span>{{ page.titre }}</span></li>
+                                        /
+                                    </li>
+                                    <li><span>{{ page.titre }}</span></li>
                                 {% endif %}
 
                             </ul>
@@ -70,12 +70,14 @@
                         <div class="right-sidebar">
                             <div class="detail-block bg-dr-blue">
                                 <div class="details-desc">
-                                    {% if page.pinterestLink is not null %}
-                                        <a data-pin-do="embedBoard" data-pin-lang="fr" data-pin-board-width="230"
-                                           data-pin-scale-height="300"
-                                           data-pin-scale-width="60"
-                                           href="https://www.pinterest.com/{{ pinterest_account }}/{{ page.pinterestLink }}/"></a>
-                                        <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+                                    {% if page.pinterestLink is defined %}
+                                        {% if page.pinterestLink is not null %}
+                                            <a data-pin-do="embedBoard" data-pin-lang="fr" data-pin-board-width="230"
+                                               data-pin-scale-height="300"
+                                               data-pin-scale-width="60"
+                                               href="https://www.pinterest.com/{{ pinterest_account }}/{{ page.pinterestLink }}/"></a>
+                                            <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+                                        {% endif %}
                                     {% endif %}
                                 </div>
                             </div>
