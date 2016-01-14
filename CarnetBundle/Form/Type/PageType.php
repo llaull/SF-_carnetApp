@@ -36,13 +36,9 @@ class PageType extends AbstractType
             'required' => true,
         ));
 
-//        $builder->add('lieu', 'choice', array(
-//            'choices' => array(
-//                'selectionne un carnet' => null,
-//            ),
-////            'choices_as_values' => true,
-////            'required' => true,
-//        ));
+        $builder->add('contenu', 'ckeditor', array(
+            'label' => 'Contenu',
+        ));
     }
     
     /**
