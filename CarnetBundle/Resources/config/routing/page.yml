@@ -31,5 +31,5 @@ admin_carnet_page_delete:
 
 admin_carnet_page_order:
     path:     /order/edit/
-    defaults: { _controller: "CarnetsBundle:Page:order" }
+    defaults: { _controller: "CarnetAppCarnetBundle:Page:order" }
     methods:  [POST, PUT]
