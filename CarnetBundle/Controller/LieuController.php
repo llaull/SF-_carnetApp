@@ -108,19 +108,23 @@ class LieuController extends Controller
      */
     public function showAction($carnet, $ville)
     {
+
         $em = $this->getDoctrine()->getManager();
 
-        $carnetInfos = $em->getRepository('CarnetAppCarnetBundle:Carnet')->findOneBySlug($carnet);
+        $entityCarnet = $em->getRepository('CarnetAppCarnetBundle:Carnet')->findOneBySlug($carnet);
 
-        $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findOneBySlug($ville);
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findBy(
+            array('carnet' => $entityCarnet, 'slug' => $ville)
+        );
+
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Lieu entity.');
         }
 
         return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
-            'entity' => $carnetInfos,
-            'page' => $entity,
+            'entity' => $entityCarnet,
+            'page' => current($entity),
         ));
     }
 

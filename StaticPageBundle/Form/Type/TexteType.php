@@ -15,16 +15,16 @@ class TexteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('created')
-            ->add('modified')
             ->add('title')
-            ->add('slug')
-            ->add('contenu')
-            ->add('useInMenu')
-            ->add('ordre')
-        ;
+            ->add('contenu', 'ckeditor', array(
+                'label' => 'Contenu',
+            ))
+            ->add('useInMenu', 'checkbox', array(
+                'required' => false,
+                'label' => 'Afficher'
+            ));
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
