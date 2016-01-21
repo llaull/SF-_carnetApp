@@ -136,21 +136,25 @@ class PageController extends Controller
      * Finds and displays a Page entity.
      *
      */
-    public function showAction($carnet, $page)
+    public function showAction($carnet, $ville, $page)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $carnetInfos = $em->getRepository('CarnetAppCarnetBundle:Carnet')->findOneBySlug($carnet);
+        $entityCarnet = $em->getRepository('CarnetAppCarnetBundle:Carnet')->findOneBySlug($carnet);
+        $entityLieu = $em->getRepository('CarnetAppCarnetBundle:Lieu')->findOneBySlug($ville);
 
-        $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->findOneBySlug($page);
+
+        $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->findBy(
+            array('lieu' => $entityLieu, 'slug' => $page)
+        );
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
         return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
-            'entity' => $carnetInfos,
-            'page' => $entity,
+            'entity' => $entityCarnet,
+            'page' => current($entity),
         ));
     }
 

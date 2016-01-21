@@ -84,28 +84,28 @@
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
-    <script type="text/javascript">
-        console.log('A');
-        $(document).ready(function () {
-            if ($('#accordion').length) {
-                console.log('Z');
+    {#<script type="text/javascript">#}
+    {#console.log('A');#}
+    {#$(document).ready(function () {#}
+    {#if ($('#accordion').length) {#}
+    {#console.log('Z');#}
 
-                var input = $('#accordion').html();
-                var lines = input.split('<ol><li>');
-                var output = '';
-                $.each(lines, function (key, line) {
-                    console.log("->");
-                    //console.log(lines);
-                    //console.log(key);
-                    //console.log(line);
-                    var parts = line.split('<p>');
-                    console.log(parts[0]);
-                    // output += '<span>' + parts[0] + ' ' + parts[1] + '</span><span>' + parts[2] + '</span>\n';
-                });
-                // $(output).appendTo('body');
+    {#var input = $('#accordion').html();#}
+    {#var lines = input.split('<ol><li>');#}
+    {#var output = '';#}
+    {#$.each(lines, function (key, line) {#}
+    {#console.log("->");#}
+    {#//console.log(lines);#}
+    {#//console.log(key);#}
+    {#//console.log(line);#}
+    {#var parts = line.split('<p>');#}
+    {#console.log(parts[0]);#}
+    {#// output += '<span>' + parts[0] + ' ' + parts[1] + '</span><span>' + parts[2] + '</span>\n';#}
+    {#});#}
+    {#// $(output).appendTo('body');#}
 
-            }
+    {#}#}
 
-        });
-    </script>
+    {#});#}
+    {#</script>#}
 {% endblock %}

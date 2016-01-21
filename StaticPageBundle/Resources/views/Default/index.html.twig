@@ -36,7 +36,6 @@
 
     {% stylesheets
     '@CarnetAppStaticPageBundle/Resources/public/css/bootstrap.min.css'
-    '@CarnetAppStaticPageBundle/Resources/public/css/jquery-ui.structure.min.css'
     '@CarnetAppStaticPageBundle/Resources/public/css/jquery-ui.min.css'
     '@CarnetAppStaticPageBundle/Resources/public/css/style.css'
     '@CarnetAppStaticPageBundle/Resources/public/css/custom.css'
@@ -82,6 +81,14 @@
 {% endjavascripts %}
 
 {% javascripts '@CarnetAppStaticPageBundle/Resources/public/js/bootstrap/bootstrap.min.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% javascripts
+'@CarnetAppStaticPageBundle/Resources/public/js/idangerous.swiper.min.js'
+'@CarnetAppStaticPageBundle/Resources/public/js/isotope.pkgd.min.js'
+'@CarnetAppStaticPageBundle/Resources/public/js/landing.js'
+'@CarnetAppStaticPageBundle/Resources/public/js/all.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

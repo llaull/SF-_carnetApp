@@ -1,3 +1,6 @@
+{#                                                          #}
+{# menu de l'application lorsque nous sommes dans un carnet #}
+{#                                                          #}
 <header class="color-1 hovered menu-3">
     <div class="container">
         <div class="row">
@@ -18,12 +21,12 @@
 
                     <nav class="menu">
                         <ul>
-                            <li class="type-1 active">
+                            <li class="type-1">
                                 <a href="{{ path('carnets_de_voy_destination',{'slug':carnet.slug}) }}">X</a>
                             </li>
                             {% for l in lieu %}
                                 {% set ville = l.ville|split(',') %}
-                                <li class="type-1 active">
+                                <li class="type-1">
                                     <a href="{{ path('carnets_de_voy_ville',{'carnet':l.carnet.slug,'ville': l.slug }) }}">{{ ville[0] }}
                                         <span class="fa fa-angle-down"></span></a>
                                     <ul class="dropmenu">

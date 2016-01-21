@@ -1,3 +1,6 @@
+{#                                                       #}
+{# affiche la page d'un carnet avec les villes en choix  #}
+{#                                                       #}
 {% extends 'CarnetAppStaticPageBundle:Default:index.html.twig' %}
 {% block body %}
 
@@ -84,13 +87,6 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-    {% javascripts
-    '@CarnetAppStaticPageBundle/Resources/public/js/idangerous.swiper.min.js'
-    '@CarnetAppStaticPageBundle/Resources/public/js/landing.js'
-    '@CarnetAppStaticPageBundle/Resources/public/js/all.js' %}
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
 
     <script type="text/javascript">
 
