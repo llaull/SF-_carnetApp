@@ -30,10 +30,10 @@
                     </thead>
                     <tbody>
                     {% for entity in entities %}
-                        <tr {% if loop.index is odd %}class="info"{% endif %}>
-                            <td class="col-md-5">{{ entity.title }}</td>
+                        <tr>
+                            <td class="col-md-4">{{ entity.title }}</td>
                             <td class="col-md-5">{{ entity.destination }}</td>
-                            <td class="col-md-2">
+                            <td class="col-md-3">
                                 <div class="btn-group">
                                     <a class="btn btn-default btn-sm" role="button"
                                        href="{{ path('carnets_de_voy_destination', { 'slug': entity.slug }) }}">view</a>

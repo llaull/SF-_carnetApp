@@ -73,7 +73,7 @@ class TexteController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_carnet_staticPage_texte_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_carnet_staticPage_texte'));
         }
 
         return $this->render('CarnetAppStaticPageBundle:Texte:new.html.twig', array(
@@ -211,22 +211,18 @@ class TexteController extends Controller
      * Deletes a Texte entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppStaticPageBundle:Texte')->find($id);
+        $entity = $em->getRepository('CarnetAppStaticPageBundle:Texte')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Texte entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Texte entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_carnet_staticPage_texte'));
     }

@@ -213,13 +213,13 @@ class LieuController extends Controller
         $entity = $em->getRepository('CarnetAppCarnetBundle:Lieu')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Lieu entity.');
+            throw $this->createNotFoundException('Unable to find Texte entity.');
         }
 
         $em->remove($entity);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('admin_carnet_lieu'));
+        return $this->redirect($this->generateUrl('admin_carnet_page'));
     }
 
     /**

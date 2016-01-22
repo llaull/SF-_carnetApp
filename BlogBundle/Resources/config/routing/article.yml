@@ -27,4 +27,4 @@ admin_carnet_blog_article_update:
 admin_carnet_blog_article_delete:
     path:     /{id}/delete
     defaults: { _controller: "CarnetAppBlogBundle:Article:delete" }
-    methods:  [POST, DELETE]
+    methods:  [POST, GET, PUT]

@@ -64,7 +64,7 @@ class CarnetController extends Controller
         }
 
         $entities = $this->getDoctrine()->getRepository('CarnetAppCarnetBundle:Carnet');
-        $entities = $entities->findPath($em,$entity->getId());
+        $entities = $entities->findPath($em, $entity->getId());
 
         return new JsonResponse(array('path' => $entities));
     }
@@ -83,6 +83,7 @@ class CarnetController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Carnet entity.
      *
@@ -103,7 +104,7 @@ class CarnetController extends Controller
 
         return $this->render('CarnetAppCarnetBundle:Carnet:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -133,11 +134,11 @@ class CarnetController extends Controller
     public function newAction()
     {
         $entity = new Carnet();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('CarnetAppCarnetBundle:Carnet:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -161,7 +162,7 @@ class CarnetController extends Controller
             array('ordre' => 'ASC'));
 
         return $this->render('CarnetAppCarnetBundle:Carnet:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'lieux' => $lieux
         ));
     }
@@ -192,21 +193,21 @@ class CarnetController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppCarnetBundle:Carnet:edit.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'lieux' => $entitiesL,
             'pages' => $entitiesP,
-            'edit_form'   => $editForm->createView(),
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Carnet entity.
-    *
-    * @param Carnet $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Carnet entity.
+     *
+     * @param Carnet $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Carnet $entity)
     {
         $form = $this->createForm(new CarnetType(), $entity, array(
@@ -218,6 +219,7 @@ class CarnetController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Carnet entity.
      *
@@ -243,23 +245,24 @@ class CarnetController extends Controller
         }
 
         return $this->render('CarnetAppCarnetBundle:Carnet:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Carnet entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CarnetAppCarnetBundle:Carnet')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Carnet entity.');
+            throw $this->createNotFoundException('Unable to find Texte entity.');
         }
 
         $em->remove($entity);
@@ -281,7 +284,6 @@ class CarnetController extends Controller
             ->setAction($this->generateUrl('admin_carnet_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

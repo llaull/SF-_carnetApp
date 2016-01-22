@@ -27,4 +27,4 @@ admin_carnet_update:
 admin_carnet_delete:
     path:     /{id}/delete
     defaults: { _controller: "CarnetAppCarnetBundle:Carnet:delete" }
-    methods:  [POST, DELETE]
+    methods:  [POST, GET, DELETE]

@@ -234,14 +234,14 @@ class PageController extends Controller
      * Deletes a Page entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CarnetAppCarnetBundle:Page')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Page entity.');
+            throw $this->createNotFoundException('Unable to find Texte entity.');
         }
 
         $em->remove($entity);

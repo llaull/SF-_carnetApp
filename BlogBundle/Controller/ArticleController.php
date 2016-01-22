@@ -190,25 +190,22 @@ class ArticleController extends Controller
      * Deletes a Article entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppBlogBundle:Article')->find($id);
+        $entity = $em->getRepository('CarnetAppBlogBundle:Article')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Article entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_carnet_blog_article'));
     }
+
 
     /**
      * Creates a form to delete a Article entity by id.

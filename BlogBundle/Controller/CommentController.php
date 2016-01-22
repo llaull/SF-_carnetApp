@@ -29,6 +29,7 @@ class CommentController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Comment entity.
      *
@@ -49,7 +50,7 @@ class CommentController extends Controller
 
         return $this->render('CarnetAppBlogBundle:Comment:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -79,11 +80,11 @@ class CommentController extends Controller
     public function newAction()
     {
         $entity = new Comment();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('CarnetAppBlogBundle:Comment:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -104,7 +105,7 @@ class CommentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppBlogBundle:Comment:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -127,19 +128,19 @@ class CommentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppBlogBundle:Comment:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Comment entity.
-    *
-    * @param Comment $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Comment entity.
+     *
+     * @param Comment $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Comment $entity)
     {
         $form = $this->createForm(new CommentType(), $entity, array(
@@ -151,6 +152,7 @@ class CommentController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Comment entity.
      *
@@ -176,31 +178,28 @@ class CommentController extends Controller
         }
 
         return $this->render('CarnetAppBlogBundle:Comment:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Comment entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppBlogBundle:Comment')->find($id);
+        $entity = $em->getRepository('CarnetAppBlogBundle:Comment')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Comment entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_carnet_blog_comment'));
     }
@@ -218,7 +217,6 @@ class CommentController extends Controller
             ->setAction($this->generateUrl('admin_carnet_blog_comment_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

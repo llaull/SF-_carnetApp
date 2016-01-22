@@ -10,24 +10,24 @@
         function initMap() {
 
 
-            var input = document.getElementById('carnetsbundle_lieu_ville');
+            var input = document.getElementById('carnetapp_carnetbundle_lieu_ville');
             new google.maps.places.SearchBox(input);
 
             var geocoder = new google.maps.Geocoder();
 
-            document.getElementById('carnetsbundle_lieu_useInPath').addEventListener('click', function() {
+            document.getElementById('carnetapp_carnetbundle_lieu_useInPath').addEventListener('click', function() {
                 geocodeAddress(geocoder);
             });
 
         }
 
         function geocodeAddress(geocoder) {
-            var address = document.getElementById('carnetsbundle_lieu_ville').value;
+            var address = document.getElementById('carnetapp_carnetbundle_lieu_ville').value;
 
             geocoder.geocode({'address': address}, function(results, status) {
                 if (status === google.maps.GeocoderStatus.OK) {
-                    $("#carnetsbundle_lieu_lat").val((results[0].geometry.location.lat()));
-                    $("#carnetsbundle_lieu_lng").val((results[0].geometry.location.lng()));
+                    $("#carnetapp_carnetbundle_lieu_lat").val((results[0].geometry.location.lat()));
+                    $("#carnetapp_carnetbundle_lieu_lng").val((results[0].geometry.location.lng()));
 
                 } else {
                     console.log('Geocode was not successful for the following reason: ' + status);

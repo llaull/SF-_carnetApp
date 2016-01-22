@@ -44,7 +44,7 @@ class CategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_carnet_blog_category_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_carnet_blog_category'));
         }
 
         return $this->render('CarnetAppBlogBundle:Category:new.html.twig', array(
@@ -185,22 +185,18 @@ class CategoryController extends Controller
      * Deletes a Category entity.
      *
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CarnetAppBlogBundle:Category')->find($id);
+        $entity = $em->getRepository('CarnetAppBlogBundle:Category')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Category entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_carnet_blog_category'));
     }

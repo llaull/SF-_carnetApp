@@ -27,7 +27,7 @@ admin_carnet_staticPage_texte_update:
 admin_carnet_staticPage_texte_delete:
     path:     /{id}/delete
     defaults: { _controller: "CarnetAppStaticPageBundle:Texte:delete" }
-    methods:  [POST, DELETE]
+    methods:  [POST, GET, DELETE]
 
 admin_carnet_staticPage_order:
     path:     /order/edit/
