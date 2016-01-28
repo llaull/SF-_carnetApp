@@ -44,7 +44,7 @@ class LieuType extends AbstractType
             ))
             ->add('imageHeader', 'elfinder', array(
                 'instance' => 'form',
-                'label' => 'header du carnet',
+                'label' => 'header du lieu',
                 'required' => false,
                 'attr' => array('class' => 'form-control')
             ))
