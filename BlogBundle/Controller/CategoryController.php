@@ -29,6 +29,7 @@ class CategoryController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Category entity.
      *
@@ -44,12 +45,13 @@ class CategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->get('ras_flash_alert.alert_reporter')->addSuccess("Category added");
             return $this->redirect($this->generateUrl('admin_carnet_blog_category'));
         }
 
         return $this->render('CarnetAppBlogBundle:Category:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -79,11 +81,11 @@ class CategoryController extends Controller
     public function newAction()
     {
         $entity = new Category();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('CarnetAppBlogBundle:Category:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -104,7 +106,7 @@ class CategoryController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppBlogBundle:Category:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -127,19 +129,19 @@ class CategoryController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppBlogBundle:Category:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Category entity.
-    *
-    * @param Category $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Category entity.
+     *
+     * @param Category $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Category $entity)
     {
         $form = $this->createForm(new CategoryType(), $entity, array(
@@ -151,6 +153,7 @@ class CategoryController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Category entity.
      *
@@ -171,16 +174,17 @@ class CategoryController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_carnet_blog_category_edit', array('id' => $id)));
+            $this->get('ras_flash_alert.alert_reporter')->addSuccess("Category updated");
+            return $this->redirect($this->generateUrl('admin_carnet_blog_category'));
         }
 
         return $this->render('CarnetAppBlogBundle:Category:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Category entity.
      *
@@ -194,9 +198,13 @@ class CategoryController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
-
-        $em->remove($entity);
-        $em->flush();
+        try {
+            $em->remove($entity);
+            $em->flush();
+            $this->get('ras_flash_alert.alert_reporter')->addSuccess("Suppression réalisé avec succèss");
+        } catch (\PDOException $e) {
+            $this->get('ras_flash_alert.alert_reporter')->addError("Suppression impossible : des articles utilise cette categorie");
+        }
 
         return $this->redirect($this->generateUrl('admin_carnet_blog_category'));
     }
@@ -214,7 +222,6 @@ class CategoryController extends Controller
             ->setAction($this->generateUrl('admin_carnet_blog_category_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

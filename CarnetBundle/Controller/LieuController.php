@@ -117,10 +117,16 @@ class LieuController extends Controller
             array('carnet' => $entityCarnet, 'slug' => $ville)
         );
 
-
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Lieu entity.');
         }
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($entity[0]->getVille() . ' - ' . $entity[0]->getCarnet()->getTitle() . " " . $this->getParameter('app_titleSuffix'))
+            ->addMeta('property', 'og:title', $seoPage->getTitle())
+            ->addMeta('property', 'og:type', 'blog')
+        ;
 
         return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
             'entity' => $entityCarnet,

@@ -161,6 +161,14 @@ class CarnetController extends Controller
             array('carnet' => $entity->getId(), 'useInPath' => "1"),
             array('ordre' => 'ASC'));
 
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($entity->getTitle() .  $this->getParameter('app_titleSuffix'))
+            ->addMeta('name', 'description', $entity->getDescription())
+            ->addMeta('property', 'og:title', $seoPage->getTitle())
+            ->addMeta('property', 'og:type', 'blog')
+            ->addMeta('property', 'og:description', $entity->getDescription());
+
         return $this->render('CarnetAppCarnetBundle:Carnet:show.html.twig', array(
             'entity' => $entity,
             'lieux' => $lieux

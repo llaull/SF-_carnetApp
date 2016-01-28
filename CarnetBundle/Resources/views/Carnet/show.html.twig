@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="title">
                                         <div class="date"> du <strong>{{ l.dateArrived|date("m/d/Y") }}</strong> au
-                                            <strong>{{ l.dateDeparture|date("m/d/Y") }}</strong></div>
+                                            <strong>{{ l.dateDeparture|date("d/m/Y") }}</strong></div>
                                         <h4>
                                             <b><a href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': l.slug }) }}">{{ ville[0] }}</a></b>
                                         </h4>
