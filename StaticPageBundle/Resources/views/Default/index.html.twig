@@ -3,10 +3,6 @@
     {% set metaTitle = entity.title %}
     {% set metaDescription = entity.title %}
 
-    {% if entity.pinterestLink is defined %}
-        {% set pinterest_board = entity.pinterestLink %}
-    {% endif %}
-
 {% endif %}
 <!DOCTYPE html>
 <html {{ sonata_seo_html_attributes() }}>

@@ -70,15 +70,25 @@
                         <div class="right-sidebar">
                             <div class="detail-block bg-dr-blue">
                                 <div class="details-desc">
+
                                     {% if page.pinterestLink is defined %}
                                         {% if page.pinterestLink is not null %}
-                                            <a data-pin-do="embedBoard" data-pin-lang="fr" data-pin-board-width="230"
-                                               data-pin-scale-height="300"
-                                               data-pin-scale-width="60"
-                                               href="https://www.pinterest.com/{{ pinterest_account }}/{{ page.pinterestLink }}/"></a>
-                                            <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+                                            {% set pinterestLink = page.pinterestLink %}
                                         {% endif %}
                                     {% endif %}
+                                    {% if page.lieu.pinterestLink is defined %}
+                                        {% if page.lieu.pinterestLink is not null %}
+                                            {% set pinterestLink = page.lieu.pinterestLink %}
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if pinterestLink is defined %}
+                                        <a data-pin-do="embedBoard" data-pin-lang="fr" data-pin-board-width="260"
+                                           data-pin-scale-height="400"
+                                           data-pin-scale-width="80"
+                                           href="https://www.pinterest.com/{{ pinterest_account }}/{{ pinterestLink }}/"></a>
+                                        <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+                                    {% endif %}
+
                                 </div>
                             </div>
 
@@ -98,4 +108,5 @@
                 </div>
             </div>
         </div>
+        {{ dump() }}
     {% endblock %}
