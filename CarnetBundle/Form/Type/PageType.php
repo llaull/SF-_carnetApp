@@ -15,18 +15,8 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre')
-//            ->add('lieu')
-        ;
+            ->add('titre');
 
-        $builder->add('carnet', 'entity', array(
-            'label' => 'carnet',
-            'attr' => array('class' => 'input-block-level'),
-            'class' => 'CarnetAppCarnetBundle:Carnet',
-            'property' => 'title',
-            'empty_value' => 'All',
-            'required' => true,
-        ));
         $builder->add('lieu', 'entity', array(
             'label' => 'lieu',
             'attr' => array('class' => 'input-block-level'),
@@ -40,7 +30,7 @@ class PageType extends AbstractType
             'label' => 'Contenu',
         ));
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

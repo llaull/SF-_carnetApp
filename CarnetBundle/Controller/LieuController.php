@@ -4,6 +4,7 @@ namespace CarnetApp\CarnetBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use CarnetApp\CarnetBundle\Entity\Lieu;
 use CarnetApp\CarnetBundle\Form\Type\LieuType;
@@ -125,8 +126,7 @@ class LieuController extends Controller
         $seoPage
             ->setTitle($entity[0]->getVille() . ' - ' . $entity[0]->getCarnet()->getTitle() . " " . $this->getParameter('app_titleSuffix'))
             ->addMeta('property', 'og:title', $seoPage->getTitle())
-            ->addMeta('property', 'og:type', 'blog')
-        ;
+            ->addMeta('property', 'og:type', 'blog');
 
         return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
             'entity' => $entityCarnet,

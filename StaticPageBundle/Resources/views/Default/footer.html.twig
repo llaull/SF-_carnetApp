@@ -3,10 +3,11 @@
     <footer class="bg-dark type-2">
         <div class="container">
             <div class="row">
+
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-block">
                         {% image '@CarnetAppStaticPageBundle/Resources/public/images/Logo_cdv.png'
-                        output='/images/carnet-de-voyage.png' %}
+                        output='images/carnet-de-voyage.png' %}
                         <img src="{{ asset_url }}" width="212px"/>
                         {% endimage %}
                         <div class="f_text color-grey-7">
@@ -18,51 +19,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-sm-6 no-padding">
-                    <div class="footer-block">
-                        <h6>Travel News</h6>
 
-                        <div class="f_news clearfix">
-                            <a class="f_news-img black-hover" href="#">
-                                {#<img class="img-responsive" src="img/home_6/news_1.jpg" alt="">#}
+                {% include '@CarnetAppTwitterBundle/Resources/views/Default/index.html.twig' ignore missing %}
 
-                                <div class="tour-layer delay-1"></div>
-                            </a>
-
-                            <div class="f_news-content">
-                                <a class="f_news-tilte color-white link-red" href="#">amazing place</a>
-                                <span class="date-f">Mar 18, 2015</span>
-                                <a href="#" class="r-more">read more</a>
-                            </div>
-                        </div>
-                        <div class="f_news clearfix">
-                            <a class="f_news-img black-hover" href="#">
-                                {#<img class="img-responsive" src="img/home_6/news_2.jpg" alt="">#}
-
-                                <div class="tour-layer delay-1"></div>
-                            </a>
-
-                            <div class="f_news-content">
-                                <a class="f_news-tilte color-white link-red" href="#">amazing place</a>
-                                <span class="date-f">Mar 18, 2015</span>
-                                <a href="#" class="r-more">read more</a>
-                            </div>
-                        </div>
-                        <div class="f_news clearfix">
-                            <a class="f_news-img black-hover" href="#">
-                                {#<img class="img-responsive" src="img/home_6/news_1.jpg" alt="">#}
-
-                                <div class="tour-layer delay-1"></div>
-                            </a>
-
-                            <div class="f_news-content">
-                                <a class="f_news-tilte color-white link-red" href="#">amazing place</a>
-                                <span class="date-f">Mar 18, 2015</span>
-                                <a href="#" class="r-more">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-block">
                         <h6>Tags:</h6>
@@ -72,6 +31,7 @@
                         {% endfor %}
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-block">
                         <h6>Contact Info</h6>
@@ -111,6 +71,4 @@
             </div>
         </div>
     </footer>
-
-
 {% endblock %}

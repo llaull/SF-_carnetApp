@@ -8,7 +8,7 @@
 {% block body %}
 
     <!-- INNER-BANNER -->
-    <div class="inner-banner style-6 background-block" style="background:#5f5f5f url('../../{{ entity.imageHeader }}')">
+    <div class="inner-banner style-6 background-block" style="background:#5f5f5f url('../../{{ entity.imageHeader }}') no-repeat center top">
         <div class="vertical-align">
             <div class="container">
                 <div class="row">
@@ -73,7 +73,7 @@
                                         <a href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': l.slug }) }}"
                                            class="c-button transparent color-grey-3 hv-o">
                                             {% image '@CarnetAppStaticPageBundle/Resources/public/images/flag_icon_grey.png'
-                                            output='/images/flag_icon_grey.png' %}
+                                            output='images/flag_icon_grey.png' %}
                                             <img src="{{ asset_url }}"/>
                                             {% endimage %}
                                             découvrir</a>

@@ -27,33 +27,33 @@
 {% block dynamic_js %}
     <script>
         (function ($) {
-            $('select[id$=carnetsbundle_page_carnet]').change(function () {
+            $('select[id$=carnetapp_carnetbundle_page_carnet]').change(function () {
 
                 //a chaque changement on vide le select
-                $('#carnetsbundle_page_lieu').empty();
+                $('#carnetapp_carnetbundle_page_lieu').empty();
 
                 $.ajax({
                     type: "POST",
                     data: "data=" + $(this).val(),
                     url: "{{ path('jquery_carnet_by_lieu') }}",
-                    always: function(){
+                    always: function () {
                         console.log("a");
-                        $('#carnetsbundle_page_lieu').append($('<option>').text("WAIT").attr('value', null));
+                        $('#carnetapp_carnetbundle_page_lieu').append($('<option>').text("WAIT").attr('value', null));
                         console.log("a");
                     },
-                    fail: function(){
+                    fail: function () {
                         console.log("a");
-                        $('#carnetsbundle_page_lieu').append($('<option>').text("selectionne").attr('value', null));
+                        $('#carnetapp_carnetbundle_page_lieu').append($('<option>').text("selectionne").attr('value', null));
                     },
                     success: function (json) {
                         if (json != '') {
                             $.each(json.lieu, function (i, value) {
                                 console.log(value);
-                                $('#carnetsbundle_page_lieu').append($('<option>').text(value.ville).attr('value', value.id));
+                                $('#carnetapp_carnetbundle_page_lieu').append($('<option>').text(value.ville).attr('value', value.id));
                             });
                         }
                         else {
-                            $('#carnetsbundle_page_lieu').append($('<option>').text("selectionne un carnet").attr('value', null));
+                            $('#carnetapp_carnetbundle_page_lieu').append($('<option>').text("selectionne un carnet").attr('value', null));
                         }
                     }
                 });
