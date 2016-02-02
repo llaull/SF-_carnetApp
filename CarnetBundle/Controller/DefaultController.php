@@ -20,23 +20,4 @@ class DefaultController extends Controller
 
         return $this->render('CarnetAppCarnetBundle:Default:accueil.html.twig', array('carnets' => $carnets, 'lieux' => $lieux));
     }
-
-    public function indexBlogAction()
-    {
-
-        $em = $this->getDoctrine()->getManager();
-        $entities = $this->getDoctrine()->getRepository('CarnetAppCarnetBundle:BlogArticle');
-        $entities = $entities->findArticleWithInfo($em);
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $entities,
-            $this->get('request')->query->get('page', 1),10
-        );
-
-
-        return $this->render('CarnetAppCarnetBundle:BlogArticle:showAll.html.twig', array(
-            'entities' => $pagination,
-        ));
-    }
 }

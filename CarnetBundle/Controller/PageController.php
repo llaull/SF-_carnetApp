@@ -74,6 +74,7 @@ class PageController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Page entity.
      *
@@ -94,7 +95,7 @@ class PageController extends Controller
 
         return $this->render('CarnetAppCarnetBundle:Page:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -124,11 +125,11 @@ class PageController extends Controller
     public function newAction()
     {
         $entity = new Page();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('CarnetAppCarnetBundle:Page:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -151,6 +152,12 @@ class PageController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($entityLieu->getVille() . ' : ' . $entity[0]->getTitre() . ' - ' . $entityCarnet->getTitle() . ' ' . $this->getParameter('app_titleSuffix'))
+            ->addMeta('property', 'og:title', $seoPage->getTitle())
+            ->addMeta('property', 'og:type', 'blog');
 
         return $this->render('CarnetAppCarnetBundle:Page:show.html.twig', array(
             'entity' => $entityCarnet,
@@ -175,18 +182,18 @@ class PageController extends Controller
         $editForm = $this->createEditForm($entity);
 
         return $this->render('CarnetAppCarnetBundle:Page:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Page entity.
-    *
-    * @param Page $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Page entity.
+     *
+     * @param Page $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Page $entity)
     {
         $form = $this->createForm(new PageType(), $entity, array(
@@ -198,6 +205,7 @@ class PageController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Page entity.
      *
@@ -223,11 +231,12 @@ class PageController extends Controller
         }
 
         return $this->render('CarnetAppCarnetBundle:Page:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Page entity.
      *
@@ -261,7 +270,6 @@ class PageController extends Controller
             ->setAction($this->generateUrl('admin_carnet_page_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

@@ -43,7 +43,7 @@ class LieuRepository extends EntityRepository
             WHERE q.id >= :rand AND q.useInPath = 1
             ORDER BY q.id ASC
             ')
-            ->setParameter('rand', rand(0, $max))
+            ->setParameter('rand', rand(10, $max))
             ->setMaxResults(10)
             ->getResult();
     }

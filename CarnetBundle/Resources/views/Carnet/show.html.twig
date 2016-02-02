@@ -8,7 +8,8 @@
 {% block body %}
 
     <!-- INNER-BANNER -->
-    <div class="inner-banner style-6 background-block" style="background:#5f5f5f url('../../{{ entity.imageHeader }}') no-repeat center top">
+    <div class="inner-banner style-6 background-block"
+         style="background:#5f5f5f url('../..{{ entity.imageHeader }}');background-position: center bottom">
         <div class="vertical-align">
             <div class="container">
                 <div class="row">
@@ -17,7 +18,7 @@
 
                             <h1>{{ entity.title }}</h1>
 
-                            <p class="color-white-light">{{ entity.description|slice(0, 220)|raw }}</p>
+                            <p class="color-white-light shadow">{{ entity.description|slice(0, 220)|raw }}</p>
 
                         </ul>
                     </div>
@@ -52,7 +53,7 @@
                 </div>
 
                 {% for row in lieux|batch(3) %}
-                    <div clas="row">
+                    <div class="row">
                         {% for l in row %}
                             {% set ville = l.ville|split(',') %}
                             <div class="col-xs-12 col-sm-6 col-md-4">
@@ -62,10 +63,10 @@
                                                     src="{{ l.imageAccueil }}" alt=""></a>
                                     </div>
                                     <div class="title">
-                                        <div class="date"> du <strong>{{ l.dateArrived|date("m/d/Y") }}</strong> au
+                                        <div class="date"> du <strong>{{ l.dateArrived|date("d/m/Y") }}</strong> au
                                             <strong>{{ l.dateDeparture|date("d/m/Y") }}</strong></div>
                                         <h4>
-                                            <b><a href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': l.slug }) }}">{{ ville[0] }}</a></b>
+                                            <a href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': l.slug }) }}"><strong>{{ ville[0] }}</strong></a>
                                         </h4>
 
                                         <p></p>

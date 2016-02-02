@@ -21,9 +21,6 @@
 
                     <nav class="menu">
                         <ul>
-                            <li class="type-1">
-                                <a href="{{ path('carnets_de_voy_destination',{'slug':carnet.slug}) }}">X</a>
-                            </li>
                             {% for l in lieu %}
                                 {% set ville = l.ville|split(',') %}
                                 <li class="type-1">

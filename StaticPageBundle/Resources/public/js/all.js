@@ -32,22 +32,45 @@ $(function () {
     /*================*/
     if ($('div#owl-demo').length) {
         $("#owl-demo").owlCarousel({
-
             autoPlay: 3000, //Set AutoPlay to 3 seconds
-
-            items: 4,
-            itemsDesktop: [1199, 3],
-            itemsDesktopSmall: [979, 3]
-
+            navigation : false, // Show next and prev buttons
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem:true,
+            navigationText: [
+                "<i class='icon-chevron-left icon-white'></i>",
+                "<i class='icon-chevron-right icon-white'></i>"
+            ]
         })
     }
 
+    $("img.s_news-img").MyThumbnail({
+        thumbWidth:360,
+        thumbHeight:258,
+        backgroundColor:"#ccc",
+        imageDivClass:"thumb"
+    });
+
     if ($('div#accordion').length) {
+
+        var icons = {
+            header: "entypo-plus",
+            activeHeader: "entypo-minus"
+        };
+
         $('#accordion').accordion({
+            icons: icons,
             active: false,
             heightStyle: "content",
             autoHeight: false,
             clearStyle: true
+        });
+        $( "#toggle" ).button().click(function() {
+            if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+                $( "#accordion" ).accordion( "option", "icons", null );
+            } else {
+                $( "#accordion" ).accordion( "option", "icons", icons );
+            }
         });
     }
 

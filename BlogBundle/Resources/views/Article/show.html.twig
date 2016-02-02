@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        {% if toolOption.blogCommentActived == true %}
                         <div class="additional-block">
                             <h4 class="additional-title">comments <span class="color-dr-blue-2">({{ comment|length }})</span></h4>
                             <ul class="comments-block">
@@ -139,7 +139,11 @@
                             {{ render(controller('CarnetAppBlogBundle:Comment:new', {'article':article.id})) }}
 
                         </div>
+                         {% endif %}
                     </div>
+
+
+
                     <div class="col-xs-12 col-md-4" >
                         <div class="right-sidebar">
                             <div class="sidebar-block type-2">

@@ -163,7 +163,7 @@ class CarnetController extends Controller
 
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
-            ->setTitle($entity->getTitle() .  $this->getParameter('app_titleSuffix'))
+            ->setTitle($entity->getTitle() . ' ' . $this->getParameter('app_titleSuffix'))
             ->addMeta('name', 'description', $entity->getDescription())
             ->addMeta('property', 'og:title', $seoPage->getTitle())
             ->addMeta('property', 'og:type', 'blog')

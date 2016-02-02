@@ -58,6 +58,7 @@ class TexteController extends Controller
             'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Texte entity.
      *
@@ -78,7 +79,7 @@ class TexteController extends Controller
 
         return $this->render('CarnetAppStaticPageBundle:Texte:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -108,11 +109,11 @@ class TexteController extends Controller
     public function newAction()
     {
         $entity = new Texte();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('CarnetAppStaticPageBundle:Texte:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -129,6 +130,12 @@ class TexteController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Texte entity.');
         }
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($entity->getTitle() . ' ' . $this->getParameter('app_titleSuffix'))
+            ->addMeta('property', 'og:title', $seoPage->getTitle())
+            ->addMeta('property', 'og:type', 'blog');
 
         return $this->render('CarnetAppStaticPageBundle:Texte:show.html.twig', array(
             'GeneralTexte' => $entity
@@ -153,19 +160,19 @@ class TexteController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('CarnetAppStaticPageBundle:Texte:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Texte entity.
-    *
-    * @param Texte $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Texte entity.
+     *
+     * @param Texte $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Texte $entity)
     {
         $form = $this->createForm(new TexteType(), $entity, array(
@@ -177,6 +184,7 @@ class TexteController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Texte entity.
      *
@@ -202,11 +210,12 @@ class TexteController extends Controller
         }
 
         return $this->render('CarnetAppStaticPageBundle:Texte:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Texte entity.
      *
@@ -240,7 +249,6 @@ class TexteController extends Controller
             ->setAction($this->generateUrl('admin_carnet_staticPage_texte_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
