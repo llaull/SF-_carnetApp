@@ -70,11 +70,11 @@ class AdminPathTest extends WebTestCase{
     public function urlProvider()
     {
         return array(
-            array('admin/carnet/'),
+            array('admin/carnet'),
             array('admin/carnet/new'),
-            array('admin/carnet/lieu/'),
+            array('admin/carnet/lieu'),
             array('admin/carnet/lieu/new'),
-            array('admin/carnet/page/'),
+            array('admin/carnet/page'),
             array('admin/carnet/page/new'),
         );
     }
