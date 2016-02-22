@@ -60,7 +60,7 @@
                                 <div class="hotel-item style-3">
                                     <div class="radius-top" style="max-height: 220px">
                                         <a href="{{ path('carnets_de_voy_ville',{'carnet':entity.slug,'ville': l.slug }) }}"><img
-                                                    src="{{ l.imageAccueil }}" alt=""></a>
+                                                    src="{{ l.imageAccueil | imagine_filter('thumb_accueil_lieux')}}" alt=""></a>
                                     </div>
                                     <div class="title">
                                         <div class="date"> du <strong>{{ l.dateArrived|date("d/m/Y") }}</strong> au

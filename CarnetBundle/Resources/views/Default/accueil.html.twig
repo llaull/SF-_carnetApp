@@ -47,9 +47,11 @@
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div class="hotel-item style-6">
                                     <div class="radius-top">
+                                        {% if carnet.imageAccueil %}
                                         <a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}">
-                                            <img src="{{ carnet.imageAccueil }}"
+                                            <img src="{{ carnet.imageAccueil | imagine_filter('thumb_accueil_lieux') }}"
                                                  alt="Carnet du voyage : {{ carnet.title }}"></a>
+                                        {% endif %}
                                     </div>
                                     <div class="title">
                                         <h5><a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}"

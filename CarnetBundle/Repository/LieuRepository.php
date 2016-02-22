@@ -20,7 +20,7 @@ class LieuRepository extends EntityRepository
         $query
             ->select($fields)
             ->from('CarnetAppCarnetBundle:Lieu', 'L')
-            ->where('L.useInPath = 1');
+            ->where('L.useInPath = 1 OR L.lat IS NOT NULL AND L.lng IS NOT NULL');
 
         return $query
             ->getQuery()

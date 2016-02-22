@@ -64,7 +64,8 @@ class AdminPathTest extends WebTestCase{
 
         $client->request('GET', $url);
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+//        $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(200 , $client->getResponse()->getStatusCode());
     }
 
     public function urlProvider()
