@@ -9,10 +9,12 @@
 namespace CarnetApp\StaticPageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
+ * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="carnet2voyage__generalTexte")
  */
 class Texte
@@ -58,11 +60,38 @@ class Texte
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $ordre;
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToOne(targetEntity="Texte")
+     * @ORM\JoinColumn(name="texte_id", referencedColumnName="id", nullable=true)
+     */
+    protected $parent;
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 
     public function __construct()
     {
         $this->created = new \DateTime();
         $this->modified = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
     }
 
     /**

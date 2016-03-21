@@ -36,6 +36,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="second-title">
+                        <h2>compilation vidéo</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="js-video [vimeo, widescreen]">
+                <iframe src="https://player.vimeo.com/video/156976520?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <p><a href="https://vimeo.com/156976520">Marine et Laurent voyage</a> from <a
+                            href="https://vimeo.com/user49426123">llovem</a> on <a href="https://vimeo.com">Vimeo</a>.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="second-title">
                         <h2>Nos carnets ({{ carnets|length }}) </h2>
                     </div>
                 </div>
@@ -48,14 +62,14 @@
                                 <div class="hotel-item style-6">
                                     <div class="radius-top">
                                         {% if carnet.imageAccueil %}
-                                        <a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}">
-                                            <img src="{{ carnet.imageAccueil | imagine_filter('thumb_accueil_lieux') }}"
-                                                 alt="Carnet du voyage : {{ carnet.title }}"></a>
+                                            <a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}">
+                                                <img src="{{ carnet.imageAccueil | imagine_filter('thumb_accueil_lieux') }}"
+                                                     alt="Carnet du voyage : {{ carnet.title }}"></a>
                                         {% endif %}
                                     </div>
                                     <div class="title">
                                         <h5><a href="{{ path('carnets_de_voy_destination',{'slug': carnet.slug}) }}"
-                                            ><strong class="color-red-3">{{ carnet.title }}</strong></a></h5>
+                                                    ><strong class="color-red-3">{{ carnet.title }}</strong></a></h5>
                                         <h4>{{ carnet.destination }}</h4>
 
                                         <div style="height: 83px;">

@@ -17,7 +17,7 @@ class MenuController extends Controller
 
         $links = $em->getRepository('CarnetAppStaticPageBundle:Texte')->findBy(
             array('useInMenu' => "1"),
-            array('title' => 'ASC'));
+            array('ordre' => 'ASC'));
 
         if (!$links) {
             throw $this->createNotFoundException('Unable to find Texte entity.');

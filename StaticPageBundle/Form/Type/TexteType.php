@@ -16,6 +16,7 @@ class TexteType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('parent')
             ->add('contenu', 'ckeditor', array(
                 'label' => 'Contenu',
             ))

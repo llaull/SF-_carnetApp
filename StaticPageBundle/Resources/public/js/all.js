@@ -44,12 +44,12 @@ $(function () {
         })
     }
 
-    $("img.s_news-img").MyThumbnail({
-        thumbWidth:360,
-        thumbHeight:258,
-        backgroundColor:"#ccc",
-        imageDivClass:"thumb"
-    });
+    //$("img.s_news-img").MyThumbnail({
+    //    thumbWidth:360,
+    //    thumbHeight:258,
+    //    backgroundColor:"#ccc",
+    //    imageDivClass:"thumb"
+    //});
 
     if ($('div#accordion').length) {
 

@@ -16,24 +16,45 @@
                         <a href="#"><i></i></a>
                     </div>
 
+
                     <nav class="menu">
                         <ul>
+
+
                             <li class="type-1">
                                 <a href="{{ path('carnets_de_voy_homepage') }}">Nos voyages</a>
                             </li>
+
                             {% if toolOption.blogActived == true %}
                                 <li class="type-1">
                                     <a title="blog carnet de voyage" href="{{ path('carnets_de_voy_blog') }}">Le
                                         lounge</a>
                                 </li>
                             {% endif %}
+
+
+
                             {% for l in links %}
                                 <li class="type-1">
-                                    <a href="{{ path('general_texte_show',{'slug':l.slug}) }}">{{ l.title }}</a>
+                                    {% if l.parent == null %}
+                                    <a href="{{ path('general_texte_show',{'slug':l.slug}) }}">{{ l.title }}<span
+                                                class="fa fa-angle-down"></span></a>
+                                    {% endif %}
+                                    <ul class="dropmenu">
+                                        {% for p in links %}
+                                            {% if p.parent != null %}
+                                                {% if p.parent.id == l.id %}
+                                                    <a href="{{ path('general_texte_show',{'slug':p.slug}) }}">{{ p.title }}</a>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+
                                 </li>
                             {% endfor %}
                         </ul>
                     </nav>
+
 
                 </div>
             </div>
